@@ -4,8 +4,7 @@ from django.db import models
 class Article(models.Model):
     title = models.CharField('标题', blank=True, null=True, max_length=64)
 
-    createDateTime = models.DateTimeField(
-        verbose_name='创建时间', auto_now_add=True)
+    createDateTime = models.DateTimeField('创建时间', auto_now_add=True)
 
     class Meta:
         verbose_name = '文章'
