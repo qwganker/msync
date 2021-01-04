@@ -3,16 +3,15 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-export default new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'landing-page',
-      component: require('@/components/LandingPage').default
-    },
-    {
-      path: '*',
-      redirect: '/'
-    }
-  ]
-})
+const routes = [
+  {
+    path: '/',
+    component: () => import(/* webpackChunkName: "main-layout" */ '@/layouts/index')
+  }
+]
+
+const router = new Router({
+  routes
+});
+
+export default router;

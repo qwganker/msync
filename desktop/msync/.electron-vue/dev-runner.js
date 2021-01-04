@@ -69,7 +69,25 @@ function startRenderer () {
           ctx.middleware.waitUntilValid(() => {
             resolve()
           })
-        }
+        },
+        proxy: {
+          '/v1': {
+            // 请求的目标服务器地址
+            target: 'http://localhost:8000/',
+            // 如果是https接口，需要配置这个参数
+            secure: false,
+            // 设置允许跨域
+            changeOrigin: true,
+            // 重写路径
+            // pathRewrite: {
+            //   '^/v1': ''
+            // },
+            headers: {
+              referer: ''
+            }
+          }
+        },
+
       }
     )
 

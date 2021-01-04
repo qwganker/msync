@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="main">
     <router-view></router-view>
   </div>
 </template>
@@ -11,5 +11,11 @@
 </script>
 
 <style>
-  /* CSS */
+html, body {
+  height: 100%;
+}
+#main {
+  height: 100%;
+}
+
 </style>

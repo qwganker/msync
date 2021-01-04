@@ -16,6 +16,9 @@ module.exports = {
     'html'
   ],
   'rules': {
+    'quotes': [0, "double"],
+    'space-before-function-paren': 0,
+    'semi': 0,
     // allow paren-less arrow functions
     'arrow-parens': 0,
     // allow async-await
