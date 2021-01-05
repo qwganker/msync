@@ -6,7 +6,18 @@ Vue.use(Router)
 const routes = [
   {
     path: '/',
-    component: () => import(/* webpackChunkName: "main-layout" */ '@/layouts/index')
+    component: () => import('@/layouts/index'),
+    redirect: '/jianshu',
+    children: [
+      {
+        path: '/jianshu',
+        component: () => import('@/pages/jianshu')
+      },
+      {
+        path: '/csdn',
+        component: () => import('@/pages/csdn')
+      }
+    ]
   }
 ]
 
