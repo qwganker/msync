@@ -5,19 +5,6 @@ class BaseSiteDriver(metaclass=ABCMeta):
     def __init__(self):
         super().__init__()
 
-    '''
-    新增
-    '''
-    @abstractclassmethod
-    def add(cls, param):
-        pass
-
-    '''
-    更新
-    '''
-    @abstractclassmethod
-    def update(cls, param):
-        pass
 
     '''
     获取博客分类
@@ -35,4 +22,25 @@ class BaseSiteDriver(metaclass=ABCMeta):
 
     @abstractclassmethod
     def fetchBlogContent(cls, param=None):
+        pass
+
+    '''
+    更新
+    '''
+    @abstractclassmethod
+    def updateBlogContent(cls, param):
+        pass
+
+    '''
+    发布
+    '''
+    @abstractclassmethod
+    def publishBlog(cls, param):
+        pass
+
+    '''
+    删除
+    '''
+    @abstractclassmethod
+    def deleteBlog(cls, param):
         pass

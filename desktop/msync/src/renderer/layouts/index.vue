@@ -30,10 +30,18 @@
           </a-menu>
         </a-col>
         <a-col :span="18">
+          <div style="padding:10px">
+            <a-button type="primary" @click="onSave">保存</a-button>
+            <a-button @click="onPublish">发布</a-button>
+            <a-button type="danger" @click="onDelete">删除</a-button>
+          </div>
+          <div style="padding: 10px; width: 50%;">
+            <a-input v-model="mdText.title"></a-input>
+          </div>
           <mavon-editor
             style="z-index:1"
             :toolbars="markdownOption"
-            v-model="mdText"
+            v-model="mdText.content"
           />
         </a-col>
       </div>
@@ -48,10 +56,15 @@ export default {
   components: {},
   data() {
     return {
-      currentSiteType: "",
+      currentSelectedSiteType: "",
+      currentSelectedBlogId: "",
+      currentSelectedCateId: "",
       cateList: [],
       blogList: [],
-      mdText: "",
+      mdText: {
+        title: "",
+        content: ""
+      },
       markdownOption: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -91,18 +104,36 @@ export default {
   },
 
   methods: {
+    findBlog(id) {
+      for (let i = 0; i < this.blogList.length; i++) {
+        const e = this.blogList[i];
+        if (e.id === id) {
+          return e
+        }
+      }
+    },
+    onSave() {
+      let blog = this.findBlog(this.currentSelectedBlogId)
+      // 简书
+      API.updateBlogContent({ siteType: this.currentSelectedSiteType, id: blog.id, title: this.mdText.title, autosave_control: ++blog.autosave_control, text: this.mdText.content }).then();
+    },
     onSelectBlog(e) {
-      API.fetchBlogContent({ siteType: this.currentSiteType, id: e.key }).then(
+      let blog = this.findBlog(e.key)
+
+      this.currentSelectedBlogId = blog.id
+      this.mdText.title = blog.title
+
+      API.fetchBlogContent({ siteType: this.currentSelectedSiteType, id: e.key }).then(
         resp => {
-          this.mdText = JSON.parse(resp.data).content
+          this.mdText.content = JSON.parse(resp.data).content
         }
       );
     },
     onSelectCate(e) {
-      API.fetchBlogList({ siteType: this.currentSiteType, id: e.key }).then(
+      this.currentSelectedCateId = e.key
+      API.fetchBlogList({ siteType: this.currentSelectedSiteType, id: e.key }).then(
         resp => {
           this.blogList = JSON.parse(resp.data);
-          console.log(this.blogList)
         }
       );
     },
@@ -110,7 +141,7 @@ export default {
       this.fetchBlogCate(e.key);
     },
     fetchBlogCate(type) {
-      this.currentSiteType = type;
+      this.currentSelectedSiteType = type;
       switch (type) {
         case "jianshu":
           API.fetchBlogCate({ siteType: "jianshu" }).then(resp => {
@@ -123,17 +154,29 @@ export default {
           alert("错误的类型");
       }
     },
-
-    onPublish(type) {
-      switch (type) {
+    onPublish() {
+      switch (this.currentSelectedSiteType) {
         case "jianshu":
-          API.publishBlog({ siteType: "jianshu", text: this.mdText });
+          API.publishBlog({ siteType: "jianshu", id: this.currentSelectedBlogId });
           break;
         case "csdn":
           break;
         default:
           alert("错误的类型");
       }
+    },
+    onDelete() {
+      switch (this.currentSelectedSiteType) {
+        case "jianshu":
+          API.deleteBlog({ siteType: "jianshu", id: this.currentSelectedBlogId });
+          break;
+        case "csdn":
+          break;
+        default:
+          alert("错误的类型");
+      }
+
+      this.onSelectCate({key: this.currentSelectedCateId})
     }
   }
 };

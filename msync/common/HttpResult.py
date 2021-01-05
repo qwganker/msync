@@ -38,7 +38,7 @@ class HttpResult():
         return resp.output()
 
     @staticmethod
-    def error(code, info='', data=''):
+    def error(code=500, info='', data=''):
         resp = HttpResult()
         resp.setCode(code)
         resp.setInfo(info)

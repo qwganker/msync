@@ -3,10 +3,13 @@ import qs from 'qs';
 import NProgress from 'nprogress';
 // import store from '@/store';
 import 'nprogress/nprogress.css';
-import { message } from 'ant-design-vue';
+import { notification } from 'ant-design-vue';
 
 // import { RESPONSE_STATUS, STORAGE_KEY } from '@/assets/js/constants';
 // import router from '@/router';
+notification.config({
+  duration: 1
+});
 
 NProgress.configure({
   showSpinner: false
@@ -29,10 +32,10 @@ function requestErrorInterceptor() {
 function responseInterceptor(response) {
   NProgress.done();
   if (response.data.code === 200) {
-    message.success(response.data.info);
+    notification.success({message: "成功", description: response.data.info});
     return response.data;
   } else {
-    message.error(response.data.info);
+    notification.error({message: "错误", description: response.data.info});
     return Promise.reject(new Error('请求错误'));
   }
 }
@@ -40,9 +43,9 @@ function responseInterceptor(response) {
 function responseErrorInterceptor(error) {
   NProgress.done();
   if (error.code === 'ECONNABORTED' && error.message.includes('timeout')) {
-    message.error('请求超时');
+    notification.error({message: "错误", description: '请求超时'});
   } else {
-    message.error('系统异常');
+    notification.error({message: "错误", description: '系统异常'});
   }
   return Promise.reject(error);
 }
