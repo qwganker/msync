@@ -36,7 +36,7 @@ class JianshuDriver(BaseSiteDriver):
         # print(response.text)
 
         # # 执行操作
-        pass
+        return HttpResult.ok(info="发布成功")
 
     def fetchBlogCate(self, param=None):
 
@@ -112,7 +112,8 @@ class JianshuDriver(BaseSiteDriver):
         payload={"id":str(param["id"]), "autosave_control": param['autosave_control'], "title":param['title'], "content":param['text']}
 
         response = requests.request("PUT", url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
-        return response.text
+
+        return HttpResult.ok(info="更新成功", data=response.text)
 
     def publishBlog(self, param):
         url = "https://www.jianshu.com/author/notes/"+ str(param['id']) +"/publicize"

@@ -23,9 +23,8 @@ class BlogPublishService(View):
         if None == siteDriver:
             pass
 
-        siteDriver.add(reqParam["text"])
+        return siteDriver.add(reqParam["text"])
 
-        return HttpResult.ok(info="发布成功")
 
 class BlogCateService(View):
 
@@ -77,10 +76,7 @@ class BlogContentService(View):
         if None == siteDriver:
             pass
 
-        result = siteDriver.updateBlogContent(reqParam)
-
-        return HttpResult.ok(info="更新成功", data=result)
-
+        return siteDriver.updateBlogContent(reqParam)
 
 class BlogPublishService(View):
     '''
