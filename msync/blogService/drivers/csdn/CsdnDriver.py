@@ -37,7 +37,7 @@ class CsdnDriver(BaseSiteDriver):
         sign = b64encode(hmac.new(ekey, to_enc, digestmod=hashlib.sha256).digest()).decode()
         return sign
 
-    def fetchBlogCategory(self, param=None):
+    def fetchBlogCate(self, param=None):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/list?type=all"
 
         uuid = self.createUuid()
@@ -65,14 +65,71 @@ class CsdnDriver(BaseSiteDriver):
 
         result = json.loads(response.text)
 
+        return HttpResult.ok(info="获取成功", data=result['data'])
 
-        return HttpResult.ok(info="获取成功", data=response.text)
+    def fetchBlogListInCate(self, param=None):
+        url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id="+str(param['id'])
 
-    def fetchBlogList(self, param=None):
-        pass
+
+        uuid = self.createUuid()
+        sign = self.createSign(uuid, url)
+
+        headers = {
+            "Host": "bizapi.csdn.net",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Referer": "https://mp.csdn.net/console/column/allColumnList",
+            "X-Ca-Key": "203803574",
+            "X-Ca-Nonce": uuid,
+            "X-Ca-Signature": sign,
+            "X-Ca-Signature-Headers": "x-ca-key,x-ca-nonce",
+            "Origin": "https://mp.csdn.net",
+            "Connection": "keep-alive",
+            "TE": "Trailers"
+        }
+ 
+        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="获取失败")
+
+        result = json.loads(response.text)
+
+        return HttpResult.ok(info="获取成功", data=result['data'])
 
     def fetchBlogContent(self, param=None):
-        pass
+
+        aid = str(param['id'])
+
+        url="https://bizapi.csdn.net/blog-console-api/v3/editor/getArticle?id="+aid+"&model_type"
+
+        uuid = self.createUuid()
+        sign = self.createSign(uuid, url)
+
+        headers = {
+            "Host": "bizapi.csdn.net",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Referer": "https://editor.csdn.net/md/?articleId="+aid,
+            "X-Ca-Key": "203803574",
+            "X-Ca-Nonce": uuid,
+            "X-Ca-Signature": sign,
+            "X-Ca-Signature-Headers": "x-ca-key,x-ca-nonce",
+            "Origin": "https://editor.csdn.net",
+            "Connection": "keep-alive",
+            "TE": "Trailers",
+            "Cache-Control": "max-age=0"
+        }
+        # print(url)
+
+        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        # print(response.status_code)
+        # print(response.headers)
+        # print(response.text)
+        return HttpResult.ok(info="获取成功", data=response.text)
 
     def updateBlogContent(self, param):
         pass

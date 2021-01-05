@@ -25,7 +25,7 @@ export function fetchBlogCate(params) {
   return network.post(url, params);
 }
 
-export function fetchBlogList(params) {
+export function fetchBlogListInCate(params) {
   const url = '/v1/blog/list';
   return network.post(url, params);
 }

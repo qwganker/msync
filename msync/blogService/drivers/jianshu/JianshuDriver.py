@@ -38,7 +38,7 @@ class JianshuDriver(BaseSiteDriver):
         # # 执行操作
         pass
 
-    def fetchBlogCategory(self, param=None):
+    def fetchBlogCate(self, param=None):
 
         headers = {
             "Host": "www.jianshu.com",
@@ -57,8 +57,8 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlogList(self, param=None):
-        url = "https://www.jianshu.com/author/notebooks/"+str(param)+"/notes"
+    def fetchBlogListInCate(self, param=None):
+        url = "https://www.jianshu.com/author/notebooks/"+str(param['id'])+"/notes"
         headers = {
             "Host": "www.jianshu.com",
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
@@ -72,7 +72,9 @@ class JianshuDriver(BaseSiteDriver):
         }
 
         response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
-        return response.text
+
+        return HttpResult.ok(info="获取成功", data=response.text)
+
 
     def fetchBlogContent(self, param=None):
         url = "https://www.jianshu.com/author/notes/"+str(param["id"])+"/content"
@@ -89,7 +91,8 @@ class JianshuDriver(BaseSiteDriver):
         }
 
         response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
-        return response.text
+
+        return HttpResult.ok(info="获取成功", data=response.text)
 
     def updateBlogContent(self, param):
         url = "https://www.jianshu.com/author/notes/" + str(param["id"])

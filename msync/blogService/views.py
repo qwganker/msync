@@ -38,24 +38,20 @@ class BlogCateService(View):
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
             pass
-        return siteDriver.fetchBlogCategory()
+        return siteDriver.fetchBlogCate()
 
-class BlogListService(View):
+class BlogListInCateService(View):
 
     '''
     获取分类下的文章列表
     '''
     def post(self, request, format=None):
         reqParam = JSONParser().parse(request)
-        print(reqParam["id"])
 
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
             pass
-        result = siteDriver.fetchBlogList(reqParam["id"])
-
-        return HttpResult.ok(info="获取成功", data=result)
-
+        return siteDriver.fetchBlogListInCate(reqParam)
 
 class BlogContentService(View):
     '''
@@ -63,15 +59,12 @@ class BlogContentService(View):
     '''
     def post(self, request, format=None):
         reqParam = JSONParser().parse(request)
-        print(reqParam)
 
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
             pass
 
-        result = siteDriver.fetchBlogContent(reqParam)
-
-        return HttpResult.ok(info="获取成功", data=result)
+        return siteDriver.fetchBlogContent(reqParam)
 
     '''
     更新内容

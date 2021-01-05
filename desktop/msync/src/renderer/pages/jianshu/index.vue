@@ -99,7 +99,6 @@ export default {
     },
     onSave() {
       let blog = this.findBlog(this.currentSelectedBlogId);
-      // 简书
       API.updateBlogContent({
         siteType: "jianshu",
         id: blog.id,
@@ -123,7 +122,7 @@ export default {
     },
     onSelectCate(e) {
       this.currentSelectedCateId = e.key;
-      API.fetchBlogList({
+      API.fetchBlogListInCate({
         siteType: "jianshu",
         id: e.key
       }).then(resp => {

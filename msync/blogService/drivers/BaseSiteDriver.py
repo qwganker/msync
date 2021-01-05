@@ -10,14 +10,14 @@ class BaseSiteDriver(metaclass=ABCMeta):
     获取博客分类
     '''
     @abstractclassmethod
-    def fetchBlogCategory(cls, param=None):
+    def fetchBlogCate(cls, param=None):
         pass
 
     '''
     获取某一个分类下的文章列表
     '''
     @abstractclassmethod
-    def fetchBlogList(cls, param=None):
+    def fetchBlogListInCate(cls, param=None):
         pass
 
     @abstractclassmethod
