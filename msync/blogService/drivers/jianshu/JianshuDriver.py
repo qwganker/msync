@@ -8,20 +8,6 @@ class JianshuDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
         self.__cookie = browser_cookie3.firefox()
 
-        headers = {
-            "Host": "www.jianshu.com",
-            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
-            "Accept": "application/json",
-            "Accept-Language": "en-US,en;q=0.5",
-
-            "Accept-Encoding": "gzip, deflate, br",
-            "Content-Type": "application/json; charset=UTF-8",
-            "Content-Length": "71",
-            "Origin": "https://www.jianshu.com",
-            "Connection": "keep-alive",
-            "Referer": "https://www.jianshu.com/writer",
-        }
-
     def add(self, param):
         
         headers = {
@@ -52,7 +38,6 @@ class JianshuDriver(BaseSiteDriver):
         # # 执行操作
         pass
 
-
     def fetchBlogCategory(self, param=None):
 
         headers = {
@@ -69,8 +54,9 @@ class JianshuDriver(BaseSiteDriver):
 
         url = 'https://www.jianshu.com/author/notebooks'
         response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
-        return response.text
-    
+
+        return HttpResult.ok(info="获取成功", data=response.text)
+
     def fetchBlogList(self, param=None):
         url = "https://www.jianshu.com/author/notebooks/"+str(param)+"/notes"
         headers = {

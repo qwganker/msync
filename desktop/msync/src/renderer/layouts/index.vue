@@ -3,6 +3,7 @@
     <a-layout-sider
       :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }"
     >
+      <div class="logo" />
       <a-menu
         @click="onSelectSite"
         theme="dark"
@@ -149,6 +150,9 @@ export default {
           });
           break;
         case "csdn":
+          API.fetchBlogCate({ siteType: "csdn" }).then(resp => {
+            this.cateList = JSON.parse(resp.data);
+          });
           break;
         default:
           alert("错误的类型");
@@ -192,4 +196,17 @@ export default {
   flex-direction: row;
   height: 100%;
 }
+
+#components-layout-demo-custom-trigger .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+#components-layout-demo-custom-trigger .trigger:hover {
+  color: #1890ff;
+}
+
 </style>

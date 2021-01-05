@@ -38,9 +38,7 @@ class BlogCateService(View):
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
             pass
-        result = siteDriver.fetchBlogCategory()
-
-        return HttpResult.ok(info="获取成功", data=result)
+        return siteDriver.fetchBlogCategory()
 
 class BlogListService(View):
 
