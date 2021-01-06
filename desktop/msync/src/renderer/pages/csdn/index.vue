@@ -35,7 +35,7 @@
 </template>
 <script>
 import * as API from "@/apis/blog.js";
-
+import showdown from 'showdown'
 export default {
   components: {},
   data() {
@@ -103,14 +103,37 @@ export default {
         }
       }
     },
+    findCate(id) {
+      for (let i = 0; i < this.cateList.list.column.length; i++) {
+        const e = this.cateList.list.column[i];
+        if (e.id === id) {
+          return e;
+        }
+      }
+    },
+
     onSave() {
+      var converter = new showdown.Converter()
       let blog = this.findBlog(this.currentSelectedBlogId);
       API.updateBlogContent({
         siteType: "csdn",
-        id: blog.id,
-        title: this.mdText.title,
-        autosave_control: ++blog.autosave_control,
-        text: this.mdText.content
+        data: {
+          id: blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1),
+          title: this.mdText.title,
+          markdowncontent: this.mdText.content,
+          content: converter.makeHtml(this.mdText.content),
+          readType: "public",
+          tags: "",
+          status: 0,
+          categories: this.findCate(this.currentSelectedCateId).title,
+          original_link: "",
+          authorized_status: "",
+          Description: this.mdText.content,
+          resource_url: "",
+          not_auto_saved: "",
+          source: "pc_mdeditor",
+          type: "original"
+        }
       }).then();
     },
     onSelectBlog(e) {
