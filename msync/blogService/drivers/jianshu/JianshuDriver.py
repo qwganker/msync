@@ -3,6 +3,7 @@ import browser_cookie3
 import requests
 import json
 from common.HttpResult import HttpResult
+from common.HttpRequestUtil import HttpRequestUtil
 
 class JianshuDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
@@ -53,7 +54,9 @@ class JianshuDriver(BaseSiteDriver):
         }
 
         url = 'https://www.jianshu.com/author/notebooks'
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="获取失败")
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
@@ -71,7 +74,9 @@ class JianshuDriver(BaseSiteDriver):
             "Referer": "https://www.jianshu.com/writer",
         }
 
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="获取失败")
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
@@ -90,7 +95,9 @@ class JianshuDriver(BaseSiteDriver):
             "Referer": "https://www.jianshu.com/writer",
         }
 
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="获取失败")
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
@@ -111,7 +118,9 @@ class JianshuDriver(BaseSiteDriver):
 
         payload={"id":str(param["id"]), "autosave_control": param['autosave_control'], "title":param['title'], "content":param['text']}
 
-        response = requests.request("PUT", url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.put(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="更新失败")
 
         return HttpResult.ok(info="更新成功", data=response.text)
 
@@ -133,7 +142,7 @@ class JianshuDriver(BaseSiteDriver):
 
         payload={}
 
-        response = requests.request("POST", url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
         result = json.loads(response.text)
         if 'error' in result:
             return HttpResult.error(info=result['error'][0]['message'])
@@ -158,6 +167,9 @@ class JianshuDriver(BaseSiteDriver):
 
         payload={}
 
-        response = requests.request("POST", url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="删除失败")
+        
         result = json.loads(response.text)
         return HttpResult.ok(info="删除成功", data=result)

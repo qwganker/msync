@@ -3,6 +3,7 @@ import browser_cookie3
 import requests
 import json
 from common.HttpResult import HttpResult
+from common.HttpRequestUtil import HttpRequestUtil
 from urllib.parse import urlparse
 from base64 import b64decode,b64encode
 import hashlib
@@ -59,7 +60,7 @@ class CsdnDriver(BaseSiteDriver):
             "TE": "Trailers"
         }
  
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -90,7 +91,7 @@ class CsdnDriver(BaseSiteDriver):
             "TE": "Trailers"
         }
  
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -123,18 +124,21 @@ class CsdnDriver(BaseSiteDriver):
             "TE": "Trailers",
             "Cache-Control": "max-age=0"
         }
-        # print(url)
 
-        response = requests.request("GET", url, headers=headers, cookies=self.__cookie)
-        # print(response.status_code)
-        # print(response.headers)
-        # print(response.text)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="获取失败")
+
         return HttpResult.ok(info="获取成功", data=response.text)
 
     def updateBlogContent(self, param):
+        url = "https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
+        
         pass
 
     def publishBlog(self, param):
+
+
         pass
 
     def deleteBlog(self, param):

@@ -125,7 +125,7 @@ export default {
         siteType: "csdn",
         id: id
       }).then(resp => {
-        this.mdText.content = JSON.parse(resp.data).data.description;
+        this.mdText.content = JSON.parse(resp.data).data.markdowncontent;
       });
     },
     onSelectCate(e) {

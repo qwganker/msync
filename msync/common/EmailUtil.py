@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 from email.header import Header
 
 
-class EmailUtils():
+class EmailUtil():
 
     @staticmethod
     def send(destEmail, text):

@@ -70,7 +70,6 @@ class BlogContentService(View):
     '''
     def put(self, request, format=None):
         reqParam = JSONParser().parse(request)
-        print(reqParam)
 
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
@@ -84,7 +83,6 @@ class BlogPublishService(View):
     '''
     def post(self, request, format=None):
         reqParam = JSONParser().parse(request)
-        print(reqParam)
 
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
@@ -97,7 +95,6 @@ class BlogPublishService(View):
     '''
     def delete(self, request, format=None):
         reqParam = JSONParser().parse(request)
-        print(reqParam)
 
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
         if None == siteDriver:
