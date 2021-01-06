@@ -15,8 +15,12 @@
         </a-menu-item>
         <a-menu-item key="csdn">
           <router-link to="/csdn" />
-          csdn
+          CSDN
         </a-menu-item>
+        <a-menu-item key="toutiao">
+          <router-link to="/toutiao" />
+          头条
+        </a-menu-item> 
       </a-menu>
     </a-layout-sider>
     <a-layout :style="{ marginLeft: '200px', height: '100%' }">

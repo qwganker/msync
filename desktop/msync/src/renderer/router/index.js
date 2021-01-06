@@ -16,6 +16,10 @@ const routes = [
       {
         path: '/csdn',
         component: () => import('@/pages/csdn')
+      },
+      {
+        path: '/toutiao',
+        component: () => import('@/pages/toutiao')
       }
     ]
   }

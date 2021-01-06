@@ -1,6 +1,6 @@
 from .jianshu.JianshuDriver import JianshuDriver
 from .csdn.CsdnDriver import CsdnDriver
-
+from .toutiao.ToutiaoDriver import ToutiaoDriver
 
 class SiteDriverFactory():
 
@@ -10,5 +10,7 @@ class SiteDriverFactory():
             return JianshuDriver()
         elif (siteType == 'csdn'):
             return CsdnDriver();
+        elif (siteType == 'toutiao'):
+            return ToutiaoDriver()
         else:
             return None
