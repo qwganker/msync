@@ -22,7 +22,8 @@ function createWindow () {
   mainWindow = new BrowserWindow({
     height: 1200,
     useContentSize: true,
-    width: 1000
+    width: 1000,
+    autoHideMenuBar: true
     // fullscreen: true
   })
 
