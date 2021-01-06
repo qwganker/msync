@@ -17,8 +17,8 @@
     <a-col :span="18">
       <div style="padding:10px">
         <a-button type="primary" @click="onSave">保存</a-button>
-        <a-button @click="onPublish">发布</a-button>
-        <a-button type="danger" @click="onDelete">删除</a-button>
+        <!-- <a-button @click="onPublish">发布</a-button> -->
+        <!-- <a-button type="danger" @click="onDelete">删除</a-button> -->
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
