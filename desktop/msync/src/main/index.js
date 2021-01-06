@@ -24,7 +24,6 @@ function createWindow () {
     useContentSize: true,
     width: 1000,
     autoHideMenuBar: true
-    // fullscreen: true
   })
 
   mainWindow.loadURL(winURL)
