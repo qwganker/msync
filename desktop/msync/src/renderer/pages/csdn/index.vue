@@ -152,6 +152,8 @@ export default {
       });
     },
     onSelectCate(e) {
+      this.mdText.title = ""
+      this.mdText.content = ""
       this.currentSelectedCateId = e.key;
       API.fetchBlogListInCate({
         siteType: "csdn",

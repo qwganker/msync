@@ -17,7 +17,7 @@
     "pack:main": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.main.config.js",
     "pack:renderer": "cross-env NODE_ENV=production webpack --progress --colors --config .electron-vue/webpack.renderer.config.js",
     "postinstall": "npm run lint:fix",
-    "pack-linux": "electron-builder --linux --x64",
+    "pack-linux": "electron-builder build --linux --x64",
     "pack-win": "electron-builder --win --x64"
   },
   "build": {

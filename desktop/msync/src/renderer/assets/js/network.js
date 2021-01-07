@@ -32,10 +32,10 @@ function requestErrorInterceptor() {
 function responseInterceptor(response) {
   NProgress.done();
   if (response.data.code === 200) {
-    notification.success({message: "成功", description: response.data.info});
+    notification.success({ message: "成功", description: response.data.info });
     return response.data;
   } else {
-    notification.error({message: "错误", description: response.data.info});
+    notification.error({ message: "错误", description: response.data.info });
     return Promise.reject(new Error('请求错误'));
   }
 }
@@ -43,9 +43,9 @@ function responseInterceptor(response) {
 function responseErrorInterceptor(error) {
   NProgress.done();
   if (error.code === 'ECONNABORTED' && error.message.includes('timeout')) {
-    notification.error({message: "错误", description: '请求超时'});
+    notification.error({ message: "错误", description: '请求超时' });
   } else {
-    notification.error({message: "错误", description: '系统异常'});
+    notification.error({ message: "错误", description: '系统异常' });
   }
   return Promise.reject(error);
 }
@@ -90,7 +90,8 @@ function genNetwork(instance) {
 }
 
 const instance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
+  // baseURL: process.env.VUE_APP_BASE_URL,
+  baseURL: process.env.NODE_ENV === 'development' ? '' : 'http://127.0.0.1:8000/',
   timeout: 1000 * 60 * 10,
   headers: {
     'X-Frame-Options': 'SAMEORIGIN'
@@ -100,20 +101,5 @@ const instance = axios.create({
 instance.interceptors.request.use(requestInterceptor, requestErrorInterceptor);
 
 instance.interceptors.response.use(responseInterceptor, responseErrorInterceptor);
-
-const pureInstance = axios.create({
-  baseURL: process.env.VUE_APP_BASE_URL,
-  timeout: 1000 * 60 * 10,
-  headers: {
-    'X-Frame-Options': 'SAMEORIGIN'
-  }
-});
-
-pureInstance.interceptors.request.use(requestInterceptor, requestErrorInterceptor);
-pureInstance.interceptors.response.use(response => {
-  NProgress.done();
-  return response.data;
-}, requestErrorInterceptor);
-export const pureNetwork = genNetwork(pureInstance);
 
 export default genNetwork(instance);

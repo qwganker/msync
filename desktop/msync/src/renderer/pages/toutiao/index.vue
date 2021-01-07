@@ -7,14 +7,14 @@
         }}</a-menu-item>
       </a-menu>
     </a-col> -->
-    <a-col style="height: 100%;" :span="6">
+    <a-col style="height: 100%;" :span="4">
       <a-menu @click="onSelectBlog" mode="inline" style="height: 100%;">
         <a-menu-item v-for="blog in blogList" :key="blog.article_attr.gid">{{
           blog.article_attr.rich_title
         }}</a-menu-item>
       </a-menu>
     </a-col>
-    <a-col :span="18">
+    <a-col :span="20">
       <div style="padding:10px">
         <a-button type="primary" @click="onSave">保存</a-button>
         <!-- <a-button @click="onPublish">发布</a-button>
