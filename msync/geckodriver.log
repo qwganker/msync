@@ -1,0 +1,115 @@
+1610010841530	geckodriver	INFO	Listening on 127.0.0.1:60345
+1610010841532	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJKb5Yb"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610010843121	Marionette	INFO	Listening on port 43251
+1610010843155	Marionette	WARN	TLS certificate errors will be ignored for this session
+console.error: Region.jsm: "Error fetching region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 726))
+console.error: Region.jsm: "Failed to fetch region" (new Error("TIMEOUT", "resource://gre/modules/Region.jsm", 376))
+1610010974824	geckodriver	INFO	Listening on 127.0.0.1:45765
+1610010974829	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileUsR0xI"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610010976500	Marionette	INFO	Listening on port 41535
+1610010976556	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: , line 0: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+1610011039267	geckodriver	INFO	Listening on 127.0.0.1:42235
+1610011039271	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilejCNUGL"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011041503	Marionette	INFO	Listening on port 46137
+1610011041597	Marionette	WARN	TLS certificate errors will be ignored for this session
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+Sandbox: Unexpected EOF, op 0 flags 00 path /sys/devices/system/cpu/present
+Exiting due to channel error.
+1610011080425	geckodriver	INFO	Listening on 127.0.0.1:43645
+1610011080428	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileZPS3hS"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011082128	Marionette	INFO	Listening on port 34011
+1610011082152	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+1610011194893	geckodriver	INFO	Listening on 127.0.0.1:38521
+1610011194900	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileM918Az"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011197428	Marionette	INFO	Listening on port 34463
+1610011197530	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610011220897	Marionette	INFO	Stopped listening on port 34011
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+IPDL protocol error: Handler returned error code!
+
+###!!! [Parent][DispatchAsyncMessage] Error: PLayerTransaction::Msg_ReleaseLayer Processing error: message was deserialized, but the handler returned false (indicating failure)
+
+1610011317597	Marionette	INFO	Stopped listening on port 34463
+1610011327059	geckodriver	INFO	Listening on 127.0.0.1:44789
+1610011327063	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile7n0Try"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011329397	Marionette	INFO	Listening on port 40601
+1610011329507	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request failed with status code 400
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1610011383289	Marionette	INFO	Stopped listening on port 40601
+1610011522783	geckodriver	INFO	Listening on 127.0.0.1:38387
+1610011522786	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileWoR83X"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011524295	Marionette	INFO	Listening on port 46831
+1610011524430	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request aborted
+1610011565656	Marionette	INFO	Stopped listening on port 46831
+1610011609442	geckodriver	INFO	Listening on 127.0.0.1:58065
+1610011609445	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilepHAHLq"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011611133	Marionette	INFO	Listening on port 38273
+1610011611168	Marionette	WARN	TLS certificate errors will be ignored for this session
+1610011639599	Marionette	INFO	Stopped listening on port 38273
+1610011660689	geckodriver	INFO	Listening on 127.0.0.1:57597
+1610011660692	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilet0Rt5X"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011663104	Marionette	INFO	Listening on port 37915
+1610011663140	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request aborted
+1610011688148	Marionette	INFO	Stopped listening on port 37915
+1610011954450	geckodriver	INFO	Listening on 127.0.0.1:54121
+1610011954453	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileO49XSt"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610011956049	Marionette	INFO	Listening on port 41145
+1610011956079	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request aborted
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1610012020812	Marionette	INFO	Stopped listening on port 41145
+1610014870432	geckodriver	INFO	Listening on 127.0.0.1:33865
+1610014870434	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileRdB9yc"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610014871964	Marionette	INFO	Listening on port 44011
+1610014872064	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_9a6c5778bef23044944d.js, line 81: Error: Request aborted
+JavaScript error: https://sf3-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/pages/login.9fdd7af7.js, line 330: Error: Request aborted
+JavaScript error: , line 0: NetworkError: FetchEvent.respondWith() Promise rejected
+1610014915027	Marionette	INFO	Stopped listening on port 44011
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

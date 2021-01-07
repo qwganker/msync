@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       siteType: "toutiao",
-      currentSelectedBlogd: "",
+      currentSelectedBlogId: "",
       currentSelectedCateId: "",
       cateList: [],
       blogList: [],
@@ -106,17 +106,17 @@ export default {
       }
     },
     onSave() {
-    //   let blog = this.findBlog(this.currentSelectedBlogId);
-    //   API.updateBlogContent({
-    //     siteType: this.siteType,
-    //     id: blog.id,
-    //     title: this.mdText.title,
-    //     autosave_control: ++blog.autosave_control,
-    //     text: this.mdText.content
-    //   }).then();
+      let blog = this.findBlog(this.currentSelectedBlogId);
+      API.updateBlogContent({
+        siteType: this.siteType,
+        id: blog.article_attr.gid,
+        title: this.mdText.title,
+        content: this.mdText.content
+      }).then();
     },
     onSelectBlog(e) {
       let blog = this.findBlog(e.key);
+      this.currentSelectedBlogId = e.key
 
       this.mdText.title = blog.article_attr.rich_title;
 
