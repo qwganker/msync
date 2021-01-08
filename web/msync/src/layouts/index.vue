@@ -1,6 +1,8 @@
 <template>
   <a-layout style="height: 100%;">
     <a-layout-sider>
+              <div class="logo" />
+
       <a-menu style="height: 100%;" theme="dark" mode="inline" :default-selected-keys="['jianshu']" :default-open-keys="['blogadmin', 'writeadmin']">
         <a-sub-menu key="blogadmin">
           <span slot="title"><a-icon type="database" /><span>文章管理</span></span>
@@ -36,5 +38,13 @@
 export default {};
 </script>
 <style scoped>
-
+.logo {
+  height: 32px;
+  background-image: url(../assets/images/icon.svg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 50% 50%;
+  margin: 16px;
+  background-color: black;
+}
 </style>
