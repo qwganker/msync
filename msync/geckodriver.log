@@ -113,3 +113,173 @@ JavaScript error: , line 0: NetworkError: FetchEvent.respondWith() Promise rejec
 
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1610067787959	geckodriver	INFO	Listening on 127.0.0.1:53197
+1610067788967	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilel1sbHJ"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610067790842	Marionette	INFO	Listening on port 38495
+1610067790890	Marionette	WARN	TLS certificate errors will be ignored for this session
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5C000A,name=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610067834823	Marionette	INFO	Stopped listening on port 38495
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610067866994	geckodriver	INFO	Listening on 127.0.0.1:38687
+1610067866997	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileyH4V3A"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610067868865	Marionette	INFO	Listening on port 46495
+1610067868923	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+1610068329228	Marionette	INFO	Stopped listening on port 46495
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610068919574	geckodriver	INFO	Listening on 127.0.0.1:45357
+1610068919576	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile5NAi41"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610068921262	Marionette	INFO	Listening on port 46565
+1610068921310	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+Exiting due to channel error.
+Exiting due to channel error.
+Exiting due to channel error.
+1610068968124	geckodriver	INFO	Listening on 127.0.0.1:53621
+1610068968127	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilehCai52"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610068969799	Marionette	INFO	Listening on port 39993
+1610068969852	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932d9dac00 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:376
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932d9dac00 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006) - static MP4Metadata::ResultAndByteBuffer mozilla::MP4Metadata::Metadata(mozilla::ByteStream *): Cannot parse metadata: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:3471
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caac400 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:376
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caac400 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006) - static MP4Metadata::ResultAndByteBuffer mozilla::MP4Metadata::Metadata(mozilla::ByteStream *): Cannot parse metadata: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:3471
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caabc00 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:376
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caabc00 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006) - static MP4Metadata::ResultAndByteBuffer mozilla::MP4Metadata::Metadata(mozilla::ByteStream *): Cannot parse metadata: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:3471
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caaac00 state=DECODING_METADATA Decode metadata failed, shutting down decoder: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:376
+[Child 11680, MediaDecoderStateMachine #1] WARNING: Decoder=7f932caaac00 Decode error: NS_ERROR_DOM_MEDIA_METADATA_ERR (0x806e0006) - static MP4Metadata::ResultAndByteBuffer mozilla::MP4Metadata::Metadata(mozilla::ByteStream *): Cannot parse metadata: file /build/firefox/src/firefox-84.0.1/dom/media/MediaDecoderStateMachine.cpp:3471
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+1610068998768	Marionette	INFO	Stopped listening on port 39993
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610069366407	geckodriver	INFO	Listening on 127.0.0.1:32941
+1610069366409	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileIgxm9k"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610069368109	Marionette	INFO	Listening on port 38607
+1610069368133	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+1610069396243	Marionette	INFO	Stopped listening on port 38607
+1610069606036	geckodriver	INFO	Listening on 127.0.0.1:48695
+1610069606039	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileJfP9v7"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610069607717	Marionette	INFO	Listening on port 43329
+1610069607821	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+1610069666841	Marionette	INFO	Stopped listening on port 43329
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610069973222	geckodriver	INFO	Listening on 127.0.0.1:45559
+1610069973225	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilekCBs0M"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610069975169	Marionette	INFO	Listening on port 39445
+1610069975246	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 568: TypeError: this.contentWindow is null
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+JavaScript error: resource://gre/actors/PictureInPictureChild.jsm, line 298: InvalidStateError: An attempt was made to use an object that is not, or is no longer, usable
+1610070026163	Marionette	INFO	Stopped listening on port 39445
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610070179095	geckodriver	INFO	Listening on 127.0.0.1:38969
+1610070179100	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofilehFRvUh"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610070181028	Marionette	INFO	Listening on port 46359
+1610070181126	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+JavaScript error: https://sf3-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/pages/login.9fdd7af7.js, line 330: Error: Request aborted
+
+###!!! [Child][MessageChannel] Error: (msgtype=0x5C000A,name=PHttpChannel::Msg_DeletingChannel) Channel closing: too late to send/recv, messages will be lost
+
+1610070239272	Marionette	INFO	Stopped listening on port 46359
+1610070242548	geckodriver	INFO	Listening on 127.0.0.1:52615
+1610070242553	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileYOhfsG"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610070244603	Marionette	INFO	Listening on port 37119
+1610070244681	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Network Error
+JavaScript error: , line 0: uncaught exception: undefined
+JavaScript error: , line 0: uncaught exception: undefined
+1610070590804	Marionette	INFO	Stopped listening on port 37119
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610074473145	geckodriver	INFO	Listening on 127.0.0.1:43573
+1610074473149	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile40f7FH"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610074474823	Marionette	INFO	Listening on port 36631
+1610074474874	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+JavaScript error: https://sf3-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/graphic/1.aed7c90b.js, line 20: TypeError: this.top.children[n] is undefined
+1610074645050	geckodriver	INFO	Listening on 127.0.0.1:33387
+1610074645057	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofileFjXrbq"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610074646849	Marionette	INFO	Listening on port 34111
+1610074646924	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/vendors_96ae183d61652d868c72.js, line 81: Error: Request aborted
+1610074661849	Marionette	INFO	Stopped listening on port 34111
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+1610074912377	Marionette	INFO	Stopped listening on port 36631
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

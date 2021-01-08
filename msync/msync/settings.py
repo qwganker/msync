@@ -122,7 +122,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-
 import time
 
 cur_path = os.path.dirname(os.path.realpath(__file__))  # log_path是存放日志的路径
@@ -198,3 +197,15 @@ LOGGING = {
         },
     }
 }
+
+# 定义平台
+PlatformDriverType = 'firefox'
+# 平台驱动存放路径
+PlatformDriverPath = ''
+
+if PlatformDriverType == 'firefox':
+    PlatformDriverPath = os.path.join(BASE_DIR, 'dependency/webdrivers/firefox/geckodriver-v0.28.0-linux64/geckodriver')
+elif PlatformDriverType == 'phantomjs':
+    pass
+elif PlatformDriverType == 'chrome':
+    pass

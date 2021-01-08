@@ -1,4 +1,4 @@
-from blogService.drivers.BaseSiteDriver import BaseSiteDriver
+from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 import browser_cookie3
 import requests
 import json
@@ -10,10 +10,11 @@ import hashlib
 import hmac
 import random
 import http.cookiejar as cookielib
+from common.platformdriver import PlatformDriver
 
 class CsdnDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
-        self.__cookie = browser_cookie3.firefox()
+        self.__cookie = PlatformDriver.getCookies()
 
     def createUuid(self):
         text = ""

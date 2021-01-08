@@ -1,16 +1,28 @@
-from blogService.drivers.BaseSiteDriver import BaseSiteDriver
-import browser_cookie3
+from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 import requests
 import json
 import gzip
+import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.ui import WebDriverWait
 
 from common.HttpResult import HttpResult
 from common.HttpRequestUtil import HttpRequestUtil
+from common.platformdriver import PlatformDriver
 
 class ToutiaoDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
-        self.__cookie = browser_cookie3.firefox()
+        self.__cookie = PlatformDriver.getCookies()
+
+    def __setDriverCookie(self, driver):
+        for c in self.__cookie:
+            if 'toutiao.com' in c.domain:
+                isScure = True
+                if (c.secure == 0):
+                    isScure = False
+                driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
 
     def fetchBlogCate(self, param=None):
         pass
@@ -32,13 +44,11 @@ class ToutiaoDriver(BaseSiteDriver):
         response.content #字节方式的响应体，会自动为你解码 gzip 和 deflate 压缩 类型：bytes
         reponse.text #字符串方式的响应体，会自动根据响应头部的字符编码进行解码。类型：str
         '''
-
         response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
         return HttpResult.ok(info="获取成功", data=response.text)
-
 
     def fetchBlogContent(self, param=None):
 
@@ -65,30 +75,38 @@ class ToutiaoDriver(BaseSiteDriver):
     def updateBlogContent(self, param):
         url = "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id="+ param['id']
 
-        driver = webdriver.Firefox(executable_path='./common/platform/firefox/geckodriver-v0.28.0-linux64/geckodriver')
+        driver = PlatformDriver.getDriver()
+        driver.maximize_window()
 
         # 必须先打开才能添加cookie
         driver.get(url)
 
-        for c in browser_cookie3.firefox():
-            if 'toutiao.com' in c.domain:
-                isScure = True
-                if (c.secure == 0):
-                    isScure = False
-                driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
+        self.__setDriverCookie(driver)
 
         driver.get(url)
 
-        title = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea')
-        title.clear()
-        title.send_keys(param['title'])
+        # 设置title
+        try:
 
-        driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
+            title_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea'
+            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
+            title = driver.find_element_by_xpath(title_xpath)
+            title.clear()
+            title.send_keys(param['title'])
 
-        publishBtn = driver.find_element_by_xpath('/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button').click()
-        
-        return HttpResult.ok(info="更新成功")
+            # 设置内容
+            driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
 
+            # 点击发布按钮
+            publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button'
+            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
+            publishBtn = driver.find_element_by_xpath(publishBtn_xpath)
+            publishBtn.click()
+
+        finally:
+            time.sleep(10)
+            driver.close()
+            return HttpResult.ok(info="更新成功")
 
     def publishBlog(self, param):
         pass

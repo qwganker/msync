@@ -1,13 +1,14 @@
-from blogService.drivers.BaseSiteDriver import BaseSiteDriver
+from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 import browser_cookie3
 import requests
 import json
 from common.HttpResult import HttpResult
 from common.HttpRequestUtil import HttpRequestUtil
+from common.platformdriver import PlatformDriver
 
 class JianshuDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
-        self.__cookie = browser_cookie3.firefox()
+        self.__cookie = PlatformDriver.getCookies()
 
     def add(self, param):
         
@@ -79,7 +80,6 @@ class JianshuDriver(BaseSiteDriver):
             return HttpResult.error(info="获取失败")
 
         return HttpResult.ok(info="获取成功", data=response.text)
-
 
     def fetchBlogContent(self, param=None):
         url = "https://www.jianshu.com/author/notes/"+str(param["id"])+"/content"
