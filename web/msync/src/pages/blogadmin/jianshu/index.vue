@@ -18,8 +18,23 @@
       <div style="padding:10px">
         <!-- <a-button type="primary" @click="onNewBlog()" style="margin-right:10px"><a-icon type="plus" />新建博客</a-button> -->
         <!-- <a-button type="primary" @click="onSave" style="margin-right:10px">保存</a-button> -->
-        <a-button type="primary" @click="onPublish(isNew=false)" style="margin-right:10px">发布</a-button>
-        <a-button type="danger" @click="onDelete">删除</a-button>
+        <a-button
+          type="primary"
+          @click="onPublish((isNew = false))"
+          style="margin-right:10px"
+          >发布</a-button
+        >
+        <a-popconfirm
+          placement="bottom"
+          ok-text="是"
+          cancel-text="否"
+          @confirm="onDelete"
+        >
+          <template slot="title">
+            确认删除
+          </template>
+          <a-button type="danger">删除</a-button>
+        </a-popconfirm>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -122,8 +137,8 @@ export default {
       });
     },
     onSelectCate(e) {
-      this.mdText.title = ""
-      this.mdText.content = ""
+      this.mdText.title = "";
+      this.mdText.content = "";
       this.currentSelectedCateId = e.key;
       API.fetchBlogListInCate({
         siteType: "jianshu",
@@ -146,7 +161,7 @@ export default {
           siteType: "jianshu",
           isNew: true,
           title: this.mdText.title,
-          text: this.mdText.content, 
+          text: this.mdText.content,
           cateId: this.currentSelectedCateId
         });
       } else {
@@ -165,8 +180,8 @@ export default {
       this.onSelectCate({ key: this.currentSelectedCateId });
     },
     onNewBlog() {
-      this.mdText.title = ""
-      this.mdText.content = ""
+      this.mdText.title = "";
+      this.mdText.content = "";
     }
   }
 };
