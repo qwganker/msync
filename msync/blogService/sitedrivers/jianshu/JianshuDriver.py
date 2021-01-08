@@ -5,13 +5,13 @@ import json
 from common.HttpResult import HttpResult
 from common.HttpRequestUtil import HttpRequestUtil
 from common.platformdriver import PlatformDriver
+from common.Timeutils import TimeUtils
 
 class JianshuDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
         self.__cookie = PlatformDriver.getCookies()
 
-    def add(self, param):
-        
+    def publishNewBlog(self, param):
         headers = {
             "Host": "www.jianshu.com",
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
@@ -26,18 +26,12 @@ class JianshuDriver(BaseSiteDriver):
             "Referer": "https://www.jianshu.com/writer",
         }
 
-        # # 判断是否登录
-        # url = "https://www.jianshu.com/author/notes/82101346"
+        # 先创建
+        url = "https://www.jianshu.com/author/notes"
+        payload={"at_bottom":True,"notebook_id":7,"title":"test-02-01","title":TimeUtils.getNow()}
 
-        # payload={"id":"82101346","autosave_control":7,"title":"test-02-01","content":reqParam['text']}
+        # 再发布
 
-
-        # cookie = {}
-
-        # response = requests.request("PUT", url, headers=headers, data=json.dumps(payload), cookies=cj)
-        # print(response.text)
-
-        # # 执行操作
         return HttpResult.ok(info="发布成功")
 
     def fetchBlogCate(self, param=None):
@@ -125,6 +119,7 @@ class JianshuDriver(BaseSiteDriver):
         return HttpResult.ok(info="更新成功", data=response.text)
 
     def publishBlog(self, param):
+
         url = "https://www.jianshu.com/author/notes/"+ str(param['id']) +"/publicize"
 
         headers = {

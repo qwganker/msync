@@ -16,9 +16,10 @@
     </a-col>
     <a-col :span="18">
       <div style="padding:10px">
-        <a-button type="primary" @click="onSave">保存</a-button>
-        <!-- <a-button @click="onPublish">发布</a-button> -->
-        <!-- <a-button type="danger" @click="onDelete">删除</a-button> -->
+        <!-- <a-button type="primary" @click="onNewBlog()" style="margin-right:10px"><a-icon type="plus" />新建博客</a-button> -->
+        <!-- <a-button type="primary" @click="onSave" style="margin-right:10px">保存</a-button> -->
+        <a-button type="primary" @click="onPublish(isNew=false)" style="margin-right:10px">发布</a-button>
+        <a-button type="danger" @click="onDelete">删除</a-button>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -139,19 +140,33 @@ export default {
         this.cateList = JSON.parse(resp.data);
       });
     },
-    onPublish() {
-      API.publishBlog({
-        siteType: "jianshu",
-        id: this.currentSelectedBlogId
-      });
+    onPublish(isNew) {
+      if (isNew) {
+        API.publishBlog({
+          siteType: "jianshu",
+          isNew: true,
+          title: this.mdText.title,
+          text: this.mdText.content, 
+          cateId: this.currentSelectedCateId
+        });
+      } else {
+        API.publishBlog({
+          siteType: "jianshu",
+          isNew: false,
+          id: this.currentSelectedBlogId
+        });
+      }
     },
     onDelete() {
       API.deleteBlog({
         siteType: "jianshu",
         id: this.currentSelectedBlogId
       });
-
       this.onSelectCate({ key: this.currentSelectedCateId });
+    },
+    onNewBlog() {
+      this.mdText.title = ""
+      this.mdText.content = ""
     }
   }
 };

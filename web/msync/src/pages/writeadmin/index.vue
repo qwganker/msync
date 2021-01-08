@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="padding:10px">
-      <a-button type="primary" @click="onPublish">发布</a-button>
+      <a-button type="primary" @click="onPublish">批量发布</a-button>
     </div>    
     <div style="padding: 10px; width: 50%;">
       <a-input v-model="mdText.title"></a-input>
