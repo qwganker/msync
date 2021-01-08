@@ -86,7 +86,7 @@ export default {
   },
 
   mounted() {
-    this.fetchBlogCate();
+    this.fetchBlogCateList();
   },
 
   methods: {
@@ -100,7 +100,7 @@ export default {
     },
     onSave() {
       let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlogContent({
+      API.updateBlog({
         siteType: "jianshu",
         id: blog.id,
         title: this.mdText.title,
@@ -114,7 +114,7 @@ export default {
       this.currentSelectedBlogId = blog.id;
       this.mdText.title = blog.title;
 
-      API.fetchBlogContent({
+      API.fetchBlog({
         siteType: "jianshu",
         id: e.key
       }).then(resp => {
@@ -133,10 +133,10 @@ export default {
       });
     },
     onSelectSite(e) {
-      this.fetchBlogCate(e.key);
+      this.fetchBlogCateList(e.key);
     },
-    fetchBlogCate(type) {
-      API.fetchBlogCate({ siteType: "jianshu" }).then(resp => {
+    fetchBlogCateList(type) {
+      API.fetchBlogCateList({ siteType: "jianshu" }).then(resp => {
         this.cateList = JSON.parse(resp.data);
       });
     },

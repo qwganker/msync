@@ -6,26 +6,26 @@ export function publishBlog(params) {
 }
 
 export function deleteBlog(params) {
-  const url = '/v1/blog/publish';
+  const url = '/v1/blog/delete';
   return network.delete(url, params);
 }
 
-export function fetchBlogContent(params) {
-  const url = '/v1/blog/content';
+export function fetchBlog(params) {
+  const url = '/v1/blog/fetch';
   return network.post(url, params);
 }
 
-export function updateBlogContent(params) {
-  const url = '/v1/blog/content';
+export function updateBlog(params) {
+  const url = '/v1/blog/update';
   return network.put(url, params);
 }
 
-export function fetchBlogCate(params) {
-  const url = '/v1/blog/cate';
+export function fetchBlogCateList(params) {
+  const url = '/v1/blog/cate_list';
   return network.post(url, params);
 }
 
 export function fetchBlogListInCate(params) {
-  const url = '/v1/blog/list';
+  const url = '/v1/blog/list_in_cate';
   return network.post(url, params);
 }

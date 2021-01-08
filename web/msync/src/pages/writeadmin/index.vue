@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div style="padding:10px">
-      <a-button type="primary" @click="onPublish">批量发布</a-button>
-    </div>    
+    <a-card :hoverable="true">
     <div style="padding: 10px; width: 50%;">
       <a-input v-model="mdText.title"></a-input>
     </div>
@@ -11,13 +9,44 @@
       :toolbars="markdownOption"
       v-model="mdText.content"
     />
+    <a-divider/>
+    <div>
+      <a-checkbox
+        :indeterminate="indeterminate"
+        :checked="checkAll"
+        @change="onCheckAllChange"
+        >全选</a-checkbox
+      >
+      <a-checkbox-group
+        v-model="checkedList"
+        :options="siteOptions"
+        @change="onChange"
+      >
+      </a-checkbox-group>
+    </div>
+    <div style="padding:10px">
+      <a-button type="primary" @click="onPublish">批量发布</a-button>
+    </div>
+    </a-card>
   </div>
 </template>
 
 <script>
+const siteOptions = ['简书', "csdn", "头条"];
+const siteOptionsMap = {
+  '简书':"jianshu",
+  "csdn":"csdn",
+  "头条":"toutiao"
+};
+
 export default {
   data() {
     return {
+      checkedList: [],
+      indeterminate: true,
+      checkAll: false,
+      siteOptions,
+      siteOptionsMap,
       mdText: {
         title: "",
         content: ""
@@ -60,7 +89,24 @@ export default {
     };
   },
   methods: {
+    onChange(checkedList) {
+      this.indeterminate =
+        !!checkedList.length && checkedList.length < siteOptions.length;
+      this.checkAll = checkedList.length === siteOptions.length;
+    },
+    onCheckAllChange(e) {
+      Object.assign(this, {
+        checkedList: e.target.checked ? siteOptions : [],
+        indeterminate: false,
+        checkAll: e.target.checked
+      });
+    },
     onPublish() {
+      let targetSites = []
+      for (let e in this.checkedList) {
+        targetSites.push(this.siteOptionsMap[this.checkedList[e]])
+      }
+
 
     }
   }

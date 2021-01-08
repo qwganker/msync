@@ -9,7 +9,7 @@ class BaseSiteDriver(metaclass=ABCMeta):
     获取博客分类
     '''
     @abstractclassmethod
-    def fetchBlogCate(cls, param=None):
+    def fetchBlogCateList(cls, param=None):
         pass
 
     '''
@@ -20,14 +20,14 @@ class BaseSiteDriver(metaclass=ABCMeta):
         pass
 
     @abstractclassmethod
-    def fetchBlogContent(cls, param=None):
+    def fetchBlog(cls, param=None):
         pass
 
     '''
     更新
     '''
     @abstractclassmethod
-    def updateBlogContent(cls, param):
+    def updateBlog(cls, param):
         pass
 
     '''

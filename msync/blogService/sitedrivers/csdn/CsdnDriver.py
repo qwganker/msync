@@ -16,7 +16,7 @@ class CsdnDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
         self.__cookie = PlatformDriver.getCookies()
 
-    def createUuid(self):
+    def __createUUID(self):
         text = ""
         char_list = []
         for c in range(97,97+6):
@@ -32,7 +32,7 @@ class CsdnDriver(BaseSiteDriver):
                 text += random.choice(char_list)
         return text
 
-    def createSign(self, method, uuid, url):
+    def __createSign(self, method, uuid, url):
         uri = urlparse(url)
         ekey = "9znpamsyl2c7cdrr9sas0le9vbc3r6ba".encode()
 
@@ -46,11 +46,11 @@ class CsdnDriver(BaseSiteDriver):
         sign = b64encode(hmac.new(ekey, to_enc, digestmod=hashlib.sha256).digest()).decode()
         return sign
 
-    def fetchBlogCate(self, param=None):
+    def fetchBlogCateList(self, param=None):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/list?type=all"
 
-        uuid = self.createUuid()
-        sign = self.createSign("GET", uuid, url)
+        uuid = self.__createUUID()
+        sign = self.__createSign("GET", uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -80,8 +80,8 @@ class CsdnDriver(BaseSiteDriver):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id="+str(param['id'])
 
 
-        uuid = self.createUuid()
-        sign = self.createSign('GET', uuid, url)
+        uuid = self.__createUUID()
+        sign = self.__createSign('GET', uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -107,14 +107,14 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=result['data'])
 
-    def fetchBlogContent(self, param=None):
+    def fetchBlog(self, param=None):
 
         aid = str(param['id'])
 
         url="https://bizapi.csdn.net/blog-console-api/v3/editor/getArticle?id="+aid+"&model_type"
 
-        uuid = self.createUuid()
-        sign = self.createSign('GET', uuid, url)
+        uuid = self.__createUUID()
+        sign = self.__createSign('GET', uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -139,12 +139,12 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def updateBlogContent(self, param):
+    def updateBlog(self, param):
         aid = str(param['data']['id'])
 
         url = "https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
-        uuid = self.createUuid()
-        sign = self.createSign('POST', uuid, url)
+        uuid = self.__createUUID()
+        sign = self.__createSign('POST', uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -172,9 +172,7 @@ class CsdnDriver(BaseSiteDriver):
         return HttpResult.ok(info="更新成功", data=response.text)
 
     def publishBlog(self, param):
-
-
-        pass
+        url = "https://editor.csdn.net/md/"
 
     def deleteBlog(self, param):
         pass

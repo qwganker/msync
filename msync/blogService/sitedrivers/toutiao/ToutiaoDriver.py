@@ -24,7 +24,7 @@ class ToutiaoDriver(BaseSiteDriver):
                     isScure = False
                 driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
 
-    def fetchBlogCate(self, param=None):
+    def fetchBlogCateList(self, param=None):
         pass
 
     def fetchBlogListInCate(self, param=None):
@@ -50,7 +50,7 @@ class ToutiaoDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlogContent(self, param=None):
+    def fetchBlog(self, param=None):
 
         aid = str(param['id'])
 
@@ -71,8 +71,7 @@ class ToutiaoDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-
-    def updateBlogContent(self, param):
+    def updateBlog(self, param):
         url = "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id="+ param['id']
 
         driver = PlatformDriver.getDriver()

@@ -16,11 +16,10 @@ class OschinaDriver(BaseSiteDriver):
                     isScure = False
                 driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
 
-
     '''
     获取博客分类
     '''
-    def fetchBlogCate(self, param=None):
+    def fetchBlogCateList(self, param=None):
         pass
 
     '''
@@ -29,13 +28,13 @@ class OschinaDriver(BaseSiteDriver):
     def fetchBlogListInCate(self, param=None):
         pass
 
-    def fetchBlogContent(self, param=None):
+    def fetchBlog(self, param=None):
         pass
 
     '''
     更新
     '''
-    def updateBlogContent(self, param):
+    def updateBlog(self, param):
         pass
 
     '''

@@ -16,7 +16,7 @@
     </a-col>
     <a-col :span="20">
       <div style="padding:10px">
-        <a-button type="primary" @click="onSave">保存</a-button>
+        <a-button type="primary" @click="onSave">发布</a-button>
         <!-- <a-button @click="onPublish">发布</a-button>
         <a-button type="danger" @click="onDelete">删除</a-button> -->
       </div>
@@ -107,7 +107,7 @@ export default {
     },
     onSave() {
       let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlogContent({
+      API.updateBlog({
         siteType: this.siteType,
         id: blog.article_attr.gid,
         title: this.mdText.title,
@@ -120,7 +120,7 @@ export default {
 
       this.mdText.title = blog.article_attr.rich_title;
 
-      API.fetchBlogContent({
+      API.fetchBlog({
         siteType: this.siteType,
         id: e.key
       }).then(resp => {
@@ -137,10 +137,10 @@ export default {
     //   });
     // },
     // onSelectSite(e) {
-    //   this.fetchBlogCate(e.key);
+    //   this.fetchBlogCateList(e.key);
     // },
-    // fetchBlogCate(type) {
-    //   API.fetchBlogCate({ siteType: this.siteType }).then(resp => {
+    // fetchBlogCateList(type) {
+    //   API.fetchBlogCateList({ siteType: this.siteType }).then(resp => {
     //     this.cateList = JSON.parse(resp.data);
     //   });
     // },

@@ -91,7 +91,7 @@ export default {
   },
 
   mounted() {
-    this.fetchBlogCate();
+    this.fetchBlogCateList();
   },
 
   methods: {
@@ -115,7 +115,7 @@ export default {
     onSave() {
       var converter = new showdown.Converter()
       let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlogContent({
+      API.updateBlog({
         siteType: "csdn",
         data: {
           id: blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1),
@@ -144,7 +144,7 @@ export default {
 
       let id = blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1)
 
-      API.fetchBlogContent({
+      API.fetchBlog({
         siteType: "csdn",
         id: id
       }).then(resp => {
@@ -163,10 +163,10 @@ export default {
       });
     },
     onSelectSite(e) {
-      this.fetchBlogCate(e.key);
+      this.fetchBlogCateList(e.key);
     },
-    fetchBlogCate(type) {
-      API.fetchBlogCate({ siteType: "csdn" }).then(resp => {
+    fetchBlogCateList(type) {
+      API.fetchBlogCateList({ siteType: "csdn" }).then(resp => {
         this.cateList = resp.data;
       });
     },

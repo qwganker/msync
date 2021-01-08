@@ -5,7 +5,7 @@
       <a-menu
         theme="dark"
         mode="inline"
-        :default-selected-keys="['jianshu']"
+        :default-selected-keys="['writeadmin']"
         :default-open-keys="['blogadmin', 'writeadmin']"
       >
         <a-menu-item key="writeadmin">

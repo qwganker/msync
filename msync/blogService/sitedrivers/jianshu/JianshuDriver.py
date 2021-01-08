@@ -34,7 +34,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="发布成功")
 
-    def fetchBlogCate(self, param=None):
+    def fetchBlogCateList(self, param=None):
 
         headers = {
             "Host": "www.jianshu.com",
@@ -75,7 +75,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlogContent(self, param=None):
+    def fetchBlog(self, param=None):
         url = "https://www.jianshu.com/author/notes/"+str(param["id"])+"/content"
         headers = {
             "Host": "www.jianshu.com",
@@ -95,7 +95,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def updateBlogContent(self, param):
+    def updateBlog(self, param):
         url = "https://www.jianshu.com/author/notes/" + str(param["id"])
         headers = {
             "Host": "www.jianshu.com",
