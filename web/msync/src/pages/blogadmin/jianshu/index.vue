@@ -20,7 +20,7 @@
           type="primary"
           @click="onPublishUpdate()"
           style="margin-right:10px"
-          >发布</a-button
+          >发布更新</a-button
         >
         <a-popconfirm
           placement="bottom"

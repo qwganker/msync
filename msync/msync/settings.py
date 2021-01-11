@@ -53,10 +53,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'msync.urls'
 
+
+STATIC_URL = '/static/'
+
+# 设置静态资源路径, 注意开头不能加 /
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "web/dist/static"),
+    os.path.join(BASE_DIR, "web/dist"),
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'web/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,9 +127,6 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
-STATIC_URL = '/static/'
-
 
 import time
 

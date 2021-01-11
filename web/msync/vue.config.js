@@ -8,6 +8,7 @@ module.exports = {
     assetsDir: 'static',
     // outputDir:'dist'
     // indexPath: 'static/public/index.html'
+    publicPath: './', 
     devServer: {
       proxy: {
         '/v1': {

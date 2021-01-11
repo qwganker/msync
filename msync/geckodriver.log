@@ -283,3 +283,12 @@ JavaScript error: https://sf6-scmcdn-tos.pstatp.com/goofy/pgcfe/mp/web/resource/
 
 ###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
 
+1610343084241	geckodriver	INFO	Listening on 127.0.0.1:51617
+1610343085247	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "--marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile1JGHCK"
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1610343087098	Marionette	INFO	Listening on port 34327
+1610343087180	Marionette	WARN	TLS certificate errors will be ignored for this session
+1610343114547	Marionette	INFO	Stopped listening on port 34327
+
+###!!! [Parent][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+

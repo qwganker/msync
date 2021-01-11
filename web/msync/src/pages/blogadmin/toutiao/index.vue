@@ -16,7 +16,7 @@
     </a-col>
     <a-col :span="20">
       <div style="padding:10px">
-        <a-button type="primary" @click="onPublishUpdate">发布</a-button>
+        <a-button type="primary" @click="onPublishUpdate">发布更新</a-button>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
