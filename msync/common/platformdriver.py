@@ -1,7 +1,8 @@
+import browser_cookie3
+from selenium import webdriver
+
 import msync.settings as CONF
 
-from selenium import webdriver
-import browser_cookie3
 
 class PlatformDriver():
 
@@ -11,7 +12,7 @@ class PlatformDriver():
 
     @staticmethod
     def getCookies():
-        if (CONF.PlatformDriverType == 'firefox'):
+        if CONF.PlatformDriverType == 'firefox':
             return browser_cookie3.firefox()
         else:
             pass

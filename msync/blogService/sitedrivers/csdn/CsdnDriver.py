@@ -1,16 +1,15 @@
-from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
-import browser_cookie3
-import requests
-import json
-from common.HttpResult import HttpResult
-from common.HttpRequestUtil import HttpRequestUtil
-from urllib.parse import urlparse
-from base64 import b64decode,b64encode
 import hashlib
 import hmac
+import json
 import random
-import http.cookiejar as cookielib
+from base64 import b64encode
+from urllib.parse import urlparse
+
+from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
+from common.HttpRequestUtil import HttpRequestUtil
+from common.HttpResult import HttpResult
 from common.platformdriver import PlatformDriver
+
 
 class CsdnDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):

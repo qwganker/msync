@@ -1,5 +1,7 @@
 import json
+
 from django.http import HttpResponse
+
 
 class HttpResult():
     def __init__(self, *args, **kwargs):

@@ -1,16 +1,14 @@
-from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
-import requests
-import json
-import gzip
 import time
-from selenium import webdriver
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
 
-from common.HttpResult import HttpResult
+from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 from common.HttpRequestUtil import HttpRequestUtil
+from common.HttpResult import HttpResult
 from common.platformdriver import PlatformDriver
+
 
 class ToutiaoDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):

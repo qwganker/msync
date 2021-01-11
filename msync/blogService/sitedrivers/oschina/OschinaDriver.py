@@ -1,7 +1,5 @@
 from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 
-from common.HttpResult import HttpResult
-from common.HttpRequestUtil import HttpRequestUtil
 from common.platformdriver import PlatformDriver
 
 class OschinaDriver(BaseSiteDriver):

@@ -1,4 +1,4 @@
-from abc import ABCMeta, abstractclassmethod
+from abc import ABCMeta
 
 class BaseSiteDriver(metaclass=ABCMeta):
 
@@ -8,38 +8,38 @@ class BaseSiteDriver(metaclass=ABCMeta):
     '''
     获取博客分类
     '''
-    @abstractclassmethod
+    @classmethod
     def fetchBlogCateList(cls, param=None):
         pass
 
     '''
     获取某一个分类下的文章列表
     '''
-    @abstractclassmethod
+    @classmethod
     def fetchBlogListInCate(cls, param=None):
         pass
 
-    @abstractclassmethod
+    @classmethod
     def fetchBlog(cls, param=None):
         pass
 
     '''
     更新
     '''
-    @abstractclassmethod
+    @classmethod
     def updateBlog(cls, param):
         pass
 
     '''
     发布
     '''
-    @abstractclassmethod
+    @classmethod
     def publishBlog(cls, param):
         pass
 
     '''
     删除
     '''
-    @abstractclassmethod
+    @classmethod
     def deleteBlog(cls, param):
         pass

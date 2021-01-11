@@ -1,9 +1,10 @@
-import smtplib
 import datetime
+import smtplib
 import time
-from django.conf import settings
-from email.mime.text import MIMEText
 from email.header import Header
+from email.mime.text import MIMEText
+
+from django.conf import settings
 
 
 class EmailUtil():

@@ -1,9 +1,6 @@
 
-from selenium import webdriver
 import browser_cookie3
-import time
-import json
-import requests
+from selenium import webdriver
 
 driver = webdriver.Firefox(executable_path='../blogService/drivers/platform/firefox/geckodriver-v0.28.0-linux64/geckodriver')
 
