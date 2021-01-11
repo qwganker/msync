@@ -16,9 +16,7 @@
     </a-col>
     <a-col :span="20">
       <div style="padding:10px">
-        <a-button type="primary" @click="onSave">发布</a-button>
-        <!-- <a-button @click="onPublish">发布</a-button>
-        <a-button type="danger" @click="onDelete">删除</a-button> -->
+        <a-button type="primary" @click="onPublishUpdate">发布</a-button>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -91,7 +89,7 @@ export default {
 
   methods: {
     fetchAllBlog() {
-      API.fetchBlogListInCate({
+      API.fetchBlogList({
         siteType: this.siteType
       }).then(resp => {
         this.blogList = JSON.parse(resp.data).contents;
@@ -105,9 +103,9 @@ export default {
         }
       }
     },
-    onSave() {
+    onPublishUpdate() {
       let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlog({
+      API.publishUpdate({
         siteType: this.siteType,
         id: blog.article_attr.gid,
         title: this.mdText.title,
@@ -120,7 +118,7 @@ export default {
 
       this.mdText.title = blog.article_attr.rich_title;
 
-      API.fetchBlog({
+      API.fetchContent({
         siteType: this.siteType,
         id: e.key
       }).then(resp => {

@@ -4,6 +4,7 @@ from common.platformdriver import PlatformDriver
 
 class OschinaDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.__cookie = PlatformDriver.getCookies()
 
     def __setDriverCookie(self, driver):
@@ -17,28 +18,28 @@ class OschinaDriver(BaseSiteDriver):
     '''
     获取博客分类
     '''
-    def fetchBlogCateList(self, param=None):
+    def fetchBlogCategoryList(self, param=None):
         pass
 
     '''
     获取某一个分类下的文章列表
     '''
-    def fetchBlogListInCate(self, param=None):
+    def fetchBlogList(self, param=None):
         pass
 
-    def fetchBlog(self, param=None):
+    def fetchContentBlog(self, param=None):
         pass
 
     '''
     更新
     '''
-    def updateBlog(self, param):
+    def publishUpdateBlog(self, param):
         pass
 
     '''
     发布
     '''
-    def publishBlog(self, param):
+    def publishNewBlog(self, param):
         pass
 
     '''

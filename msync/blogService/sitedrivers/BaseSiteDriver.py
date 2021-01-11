@@ -9,32 +9,32 @@ class BaseSiteDriver(metaclass=ABCMeta):
     获取博客分类
     '''
     @classmethod
-    def fetchBlogCateList(cls, param=None):
+    def fetchBlogCategoryList(cls, param=None):
         pass
 
     '''
-    获取某一个分类下的文章列表
+    获取博客列表
     '''
     @classmethod
-    def fetchBlogListInCate(cls, param=None):
+    def fetchBlogList(cls, param=None):
         pass
 
     @classmethod
-    def fetchBlog(cls, param=None):
+    def fetchContentBlog(cls, param=None):
         pass
 
     '''
-    更新
+    更新博客
     '''
     @classmethod
-    def updateBlog(cls, param):
+    def publishUpdateBlog(cls, param):
         pass
 
     '''
-    发布
+    发布新博客
     '''
     @classmethod
-    def publishBlog(cls, param):
+    def publishNewBlog(cls, param):
         pass
 
     '''

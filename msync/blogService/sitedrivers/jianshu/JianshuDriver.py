@@ -9,6 +9,7 @@ from common.platformdriver import PlatformDriver
 
 class JianshuDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.__cookie = PlatformDriver.getCookies()
 
     def publishNewBlog(self, param):
@@ -34,7 +35,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="发布成功")
 
-    def fetchBlogCateList(self, param=None):
+    def fetchBlogCategoryList(self, param=None):
 
         headers = {
             "Host": "www.jianshu.com",
@@ -55,7 +56,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlogListInCate(self, param=None):
+    def fetchBlogList(self, param=None):
         url = "https://www.jianshu.com/author/notebooks/"+str(param['id'])+"/notes"
         headers = {
             "Host": "www.jianshu.com",
@@ -75,7 +76,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlog(self, param=None):
+    def fetchContentBlog(self, param=None):
         url = "https://www.jianshu.com/author/notes/"+str(param["id"])+"/content"
         headers = {
             "Host": "www.jianshu.com",
@@ -95,7 +96,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def updateBlog(self, param):
+    def publishUpdateBlog(self, param):
         url = "https://www.jianshu.com/author/notes/" + str(param["id"])
         headers = {
             "Host": "www.jianshu.com",
@@ -118,7 +119,7 @@ class JianshuDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="更新成功", data=response.text)
 
-    def publishBlog(self, param):
+    def publishNewBlog(self, param):
 
         url = "https://www.jianshu.com/author/notes/"+ str(param['id']) +"/publicize"
 
@@ -165,6 +166,6 @@ class JianshuDriver(BaseSiteDriver):
         response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="删除失败")
-        
+
         result = json.loads(response.text)
         return HttpResult.ok(info="删除成功", data=result)

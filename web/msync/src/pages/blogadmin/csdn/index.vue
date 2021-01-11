@@ -18,9 +18,8 @@
     </a-col>
     <a-col :span="18">
       <div style="padding:10px">
-        <a-button type="primary" @click="onSave">发布</a-button>
-        <!-- <a-button @click="onPublish">发布</a-button>
-        <a-button type="danger" @click="onDelete">删除</a-button> -->
+        <a-button type="primary" @click="onPublishUpdate">发布</a-button>
+        <a-button type="danger" @click="onDelete">删除</a-button>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -112,10 +111,10 @@ export default {
       }
     },
 
-    onSave() {
+    onPublishUpdate() {
       var converter = new showdown.Converter()
       let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlog({
+      API.publishUpdate({
         siteType: "csdn",
         data: {
           id: blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1),
@@ -144,7 +143,7 @@ export default {
 
       let id = blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1)
 
-      API.fetchBlog({
+      API.fetchContent({
         siteType: "csdn",
         id: id
       }).then(resp => {
@@ -155,7 +154,7 @@ export default {
       this.mdText.title = ""
       this.mdText.content = ""
       this.currentSelectedCateId = e.key;
-      API.fetchBlogListInCate({
+      API.fetchBlogList({
         siteType: "csdn",
         id: e.key
       }).then(resp => {
@@ -166,12 +165,12 @@ export default {
       this.fetchBlogCateList(e.key);
     },
     fetchBlogCateList(type) {
-      API.fetchBlogCateList({ siteType: "csdn" }).then(resp => {
+      API.fetchBlogCategoryList({ siteType: "csdn" }).then(resp => {
         this.cateList = resp.data;
       });
     },
     onPublish() {
-      API.publishBlog({
+      API.publishUpdate({
         siteType: "csdn",
         id: this.currentSelectedBlogId
       });

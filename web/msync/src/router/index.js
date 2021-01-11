@@ -7,7 +7,7 @@ const routes = [
   {
     path: '/',
     component: () => import('@/layouts/index'),
-    redirect: '/blogadmin',
+    redirect: '/writeadmin',
     children: [
       {
         path: '/blogadmin',

@@ -4,35 +4,35 @@ from rest_framework.parsers import JSONParser
 from .sitedrivers.SiteDriverFactory import SiteDriverFactory
 
 
-class BlogListCateService(View):
+class BlogListCategortyService(View):
     def post(self, request):
         reqParam = JSONParser().parse(request)
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
-        return siteDriver.fetchBlogCateList()
+        return siteDriver.fetchBlogCategoryList()
 
 class BlogListService(View):
     def post(self, request):
         reqParam = JSONParser().parse(request)
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
-        return siteDriver.fetchBlogListInCate(reqParam)
+        return siteDriver.fetchBlogList(reqParam)
 
-class BlogFetchContetnService(View):
+class BlogFetchContentService(View):
     def post(self, request):
         reqParam = JSONParser().parse(request)
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
-        return siteDriver.fetchBlog(reqParam)
+        return siteDriver.fetchContentBlog(reqParam)
 
 class BlogPublishUpdateService(View):
     def put(self, request):
         reqParam = JSONParser().parse(request)
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
-        return siteDriver.updateBlog(reqParam)
+        return siteDriver.publishUpdateBlog(reqParam)
 
 class BlogPublishNewService(View):
     def post(self, request):
         reqParam = JSONParser().parse(request)
         siteDriver = SiteDriverFactory.create(reqParam["siteType"])
-        return siteDriver.publishBlog(reqParam)
+        return siteDriver.publishNewBlog(reqParam)
 
 class BlogDeleteService(View):
     def delete(self, request):

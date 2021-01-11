@@ -12,6 +12,7 @@ from common.platformdriver import PlatformDriver
 
 class ToutiaoDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.__cookie = PlatformDriver.getCookies()
 
     def __setDriverCookie(self, driver):
@@ -22,10 +23,10 @@ class ToutiaoDriver(BaseSiteDriver):
                     isScure = False
                 driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
 
-    def fetchBlogCateList(self, param=None):
+    def fetchBlogCategoryList(self, param=None):
         pass
 
-    def fetchBlogListInCate(self, param=None):
+    def fetchBlogList(self, param=None):
         url = 'https://mp.toutiao.com/mp/agw/creator_center/list?type=2&status=0&start_cursor=0&end_cursor=0&size=10&mode=2&need_stat=true&page_time={"index":1,"time_stamp":0}&filter_params={"search_word":"","source":0}&app_id=1231'
 
         headers = {
@@ -48,7 +49,7 @@ class ToutiaoDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def fetchBlog(self, param=None):
+    def fetchContentBlog(self, param=None):
 
         aid = str(param['id'])
 
@@ -69,7 +70,7 @@ class ToutiaoDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def updateBlog(self, param):
+    def publishUpdateBlog(self, param):
         url = "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id="+ param['id']
 
         driver = PlatformDriver.getDriver()
@@ -105,7 +106,7 @@ class ToutiaoDriver(BaseSiteDriver):
             driver.close()
             return HttpResult.ok(info="更新成功")
 
-    def publishBlog(self, param):
+    def publishNewBlog(self, param):
         pass
 
     def deleteBlog(self, param):

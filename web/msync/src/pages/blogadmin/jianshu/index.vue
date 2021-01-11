@@ -16,11 +16,9 @@
     </a-col>
     <a-col :span="18">
       <div style="padding:10px">
-        <!-- <a-button type="primary" @click="onNewBlog()" style="margin-right:10px"><a-icon type="plus" />新建博客</a-button> -->
-        <!-- <a-button type="primary" @click="onSave" style="margin-right:10px">保存</a-button> -->
         <a-button
           type="primary"
-          @click="onPublish((isNew = false))"
+          @click="onPublishUpdate()"
           style="margin-right:10px"
           >发布</a-button
         >
@@ -113,23 +111,13 @@ export default {
         }
       }
     },
-    onSave() {
-      let blog = this.findBlog(this.currentSelectedBlogId);
-      API.updateBlog({
-        siteType: "jianshu",
-        id: blog.id,
-        title: this.mdText.title,
-        autosave_control: ++blog.autosave_control,
-        text: this.mdText.content
-      }).then();
-    },
     onSelectBlog(e) {
       let blog = this.findBlog(e.key);
 
       this.currentSelectedBlogId = blog.id;
       this.mdText.title = blog.title;
 
-      API.fetchBlog({
+      API.fetchContent({
         siteType: "jianshu",
         id: e.key
       }).then(resp => {
@@ -140,7 +128,7 @@ export default {
       this.mdText.title = "";
       this.mdText.content = "";
       this.currentSelectedCateId = e.key;
-      API.fetchBlogListInCate({
+      API.fetchBlogList({
         siteType: "jianshu",
         id: e.key
       }).then(resp => {
@@ -151,26 +139,17 @@ export default {
       this.fetchBlogCateList(e.key);
     },
     fetchBlogCateList(type) {
-      API.fetchBlogCateList({ siteType: "jianshu" }).then(resp => {
+      API.fetchBlogCategoryList({ siteType: "jianshu" }).then(resp => {
         this.cateList = JSON.parse(resp.data);
       });
     },
-    onPublish(isNew) {
-      if (isNew) {
-        API.publishBlog({
-          siteType: "jianshu",
-          isNew: true,
-          title: this.mdText.title,
-          text: this.mdText.content,
-          cateId: this.currentSelectedCateId
-        });
-      } else {
-        API.publishBlog({
-          siteType: "jianshu",
-          isNew: false,
-          id: this.currentSelectedBlogId
-        });
-      }
+    onPublishUpdate() {
+      API.publishUpdate({
+        siteType: "jianshu",
+        title: this.mdText.title,
+        text: this.mdText.content,
+        cateId: this.currentSelectedCateId
+      });
     },
     onDelete() {
       API.deleteBlog({

@@ -13,6 +13,7 @@ from common.platformdriver import PlatformDriver
 
 class CsdnDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
+        super().__init__()
         self.__cookie = PlatformDriver.getCookies()
 
     def __createUUID(self):
@@ -45,7 +46,7 @@ class CsdnDriver(BaseSiteDriver):
         sign = b64encode(hmac.new(ekey, to_enc, digestmod=hashlib.sha256).digest()).decode()
         return sign
 
-    def fetchBlogCateList(self, param=None):
+    def fetchBlogCategoryList(self, param=None):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/list?type=all"
 
         uuid = self.__createUUID()
@@ -75,7 +76,7 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=result['data'])
 
-    def fetchBlogListInCate(self, param=None):
+    def fetchBlogList(self, param=None):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id="+str(param['id'])
 
 
@@ -106,7 +107,7 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=result['data'])
 
-    def fetchBlog(self, param=None):
+    def fetchContentBlog(self, param=None):
 
         aid = str(param['id'])
 
@@ -138,7 +139,7 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="获取成功", data=response.text)
 
-    def updateBlog(self, param):
+    def publishUpdateBlog(self, param):
         aid = str(param['data']['id'])
 
         url = "https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
@@ -170,7 +171,7 @@ class CsdnDriver(BaseSiteDriver):
 
         return HttpResult.ok(info="更新成功", data=response.text)
 
-    def publishBlog(self, param):
+    def publishNewBlog(self, param):
         url = "https://editor.csdn.net/md/"
 
     def deleteBlog(self, param):
