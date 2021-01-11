@@ -1,2 +1,4 @@
 /logs/*
 __pycache__/
+/web
+geckodriver.log

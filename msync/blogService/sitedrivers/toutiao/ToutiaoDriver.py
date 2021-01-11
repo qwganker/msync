@@ -9,6 +9,9 @@ from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
 from common.platformdriver import PlatformDriver
 
+import logging
+
+logger = logging.getLogger('log')
 
 class ToutiaoDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
@@ -85,15 +88,18 @@ class ToutiaoDriver(BaseSiteDriver):
 
         # 设置title
         try:
-
             title_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea'
             WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
             title = driver.find_element_by_xpath(title_xpath)
             title.clear()
             title.send_keys(param['title'])
 
+            time.sleep(4)
+
             # 设置内容
             driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
+
+            time.sleep(1)
 
             # 点击发布按钮
             publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button'
@@ -102,12 +108,47 @@ class ToutiaoDriver(BaseSiteDriver):
             publishBtn.click()
 
         finally:
-            time.sleep(10)
+            time.sleep(5)
             driver.close()
             return HttpResult.ok(info="更新成功")
 
     def publishNewBlog(self, param):
-        pass
+        url = 'https://mp.toutiao.com/profile_v4/graphic/publish'
+        driver = PlatformDriver.getDriver()
+        driver.maximize_window()
+
+        # 必须先打开才能添加cookie
+        driver.get(url)
+
+        self.__setDriverCookie(driver)
+
+        driver.get(url)
+
+        try:
+            title_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea'
+            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
+            title = driver.find_element_by_xpath(title_xpath)
+            title.clear()
+            title.send_keys(param['title'])
+
+            time.sleep(5)
+
+            # 设置内容
+            driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
+
+            time.sleep(2)
+
+            # 点击发布按钮
+            publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button[4]'
+            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
+            publishBtn = driver.find_element_by_xpath(publishBtn_xpath)
+            publishBtn.click()
+
+        finally:
+            time.sleep(5)
+            driver.close()
+            return HttpResult.ok(info="发布成功")
+
 
     def deleteBlog(self, param):
         pass

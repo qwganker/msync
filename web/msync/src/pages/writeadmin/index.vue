@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import * as API from "@/apis/blog.js";
+
 const siteOptions = ['简书', "csdn", "头条"];
 const siteOptionsMap = {
   '简书':"jianshu",
@@ -107,7 +109,11 @@ export default {
         targetSites.push(this.siteOptionsMap[this.checkedList[e]])
       }
 
-
+      API.publishNew({
+        siteType: "toutiao",
+        title: this.mdText.title,
+        content: this.mdText.content
+      }).then();
     }
   }
 };
