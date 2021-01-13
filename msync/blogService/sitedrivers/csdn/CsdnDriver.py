@@ -10,6 +10,10 @@ from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
 from common.platformdriver import PlatformDriver
 
+import logging
+
+logger = logging.getLogger('log')
+
 
 class CsdnDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
@@ -19,9 +23,9 @@ class CsdnDriver(BaseSiteDriver):
     def __createUUID(self):
         text = ""
         char_list = []
-        for c in range(97,97+6):
+        for c in range(97, 97 + 6):
             char_list.append(chr(c))
-        for c in range(49,58):
+        for c in range(49, 58):
             char_list.append(chr(c))
         for i in "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx":
             if i == "4":
@@ -37,7 +41,7 @@ class CsdnDriver(BaseSiteDriver):
         ekey = "9znpamsyl2c7cdrr9sas0le9vbc3r6ba".encode()
 
         if method == 'GET':
-            to_enc = f"{method}\napplication/json, text/plain, */*\n\n\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path+'?'+uri.query}".encode()
+            to_enc = f"{method}\napplication/json, text/plain, */*\n\n\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path + '?' + uri.query}".encode()
         else:
             to_enc = f"{method}\napplication/json, text/plain, */*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path}".encode()
 
@@ -67,7 +71,7 @@ class CsdnDriver(BaseSiteDriver):
             "Connection": "keep-alive",
             "TE": "Trailers"
         }
- 
+
         response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
@@ -77,8 +81,7 @@ class CsdnDriver(BaseSiteDriver):
         return HttpResult.ok(info="获取成功", data=result['data'])
 
     def fetchBlogList(self, param=None):
-        url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id="+str(param['id'])
-
+        url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id=" + str(param['id'])
 
         uuid = self.__createUUID()
         sign = self.__createSign('GET', uuid, url)
@@ -98,7 +101,7 @@ class CsdnDriver(BaseSiteDriver):
             "Connection": "keep-alive",
             "TE": "Trailers"
         }
- 
+
         response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
@@ -111,7 +114,7 @@ class CsdnDriver(BaseSiteDriver):
 
         aid = str(param['id'])
 
-        url="https://bizapi.csdn.net/blog-console-api/v3/editor/getArticle?id="+aid+"&model_type"
+        url = "https://bizapi.csdn.net/blog-console-api/v3/editor/getArticle?id=" + aid + "&model_type"
 
         uuid = self.__createUUID()
         sign = self.__createSign('GET', uuid, url)
@@ -122,7 +125,7 @@ class CsdnDriver(BaseSiteDriver):
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-US,en;q=0.5",
             "Accept-Encoding": "gzip, deflate, br",
-            "Referer": "https://editor.csdn.net/md/?articleId="+aid,
+            "Referer": "https://editor.csdn.net/md/?articleId=" + aid,
             "X-Ca-Key": "203803574",
             "X-Ca-Nonce": uuid,
             "X-Ca-Signature": sign,
@@ -152,7 +155,7 @@ class CsdnDriver(BaseSiteDriver):
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-US,en;q=0.5",
             "Accept-Encoding": "gzip, deflate, br",
-            "Referer": "https://editor.csdn.net/md/?articleId="+aid,
+            "Referer": "https://editor.csdn.net/md/?articleId=" + aid,
             "X-Ca-Key": "203803574",
             "X-Ca-Nonce": uuid,
             "X-Ca-Signature": sign,
@@ -175,4 +178,32 @@ class CsdnDriver(BaseSiteDriver):
         url = "https://editor.csdn.net/md/"
 
     def deleteBlog(self, param):
-        pass
+        url = 'https://bizapi.csdn.net/blog-console-api/v1/article/del'
+        uuid = self.__createUUID()
+        sign = self.__createSign('POST', uuid, url)
+
+        payload = {"article_id": str(param['id']), "deep": "false"}
+        headers = {
+            "Host": "bizapi.csdn.net",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Referer": 'https://mp.csdn.net/console/article',
+            "X-Ca-Key": "203803574",
+            "X-Ca-Nonce": uuid,
+            "X-Ca-Signature": sign,
+            "X-Ca-Signature-Headers": "x-ca-key,x-ca-nonce",
+            "Origin": "https://editor.csdn.net",
+            "Connection": "keep-alive",
+            "TE": "Trailers",
+            "Cache-Control": "max-age=0",
+            "Content-Type": "application/json",
+            "Content-Length": str(len(payload))
+        }
+
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="删除失败")
+
+        return HttpResult.ok(info="删除成功", data=response.text)

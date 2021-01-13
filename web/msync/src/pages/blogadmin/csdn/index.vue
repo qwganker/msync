@@ -19,7 +19,17 @@
     <a-col :span="18">
       <div style="padding:10px">
         <a-button type="primary" @click="onPublishUpdate">发布更新</a-button>
-        <a-button type="danger" @click="onDelete">删除</a-button>
+        <a-popconfirm
+          placement="bottom"
+          ok-text="是"
+          cancel-text="否"
+          @confirm="onDelete"
+        >
+          <template slot="title">
+            确认删除
+          </template>
+          <a-button type="danger">删除</a-button>
+        </a-popconfirm>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -176,9 +186,11 @@ export default {
       });
     },
     onDelete() {
+      let blog = this.findBlog(this.currentSelectedBlogId);
+
       API.deleteBlog({
         siteType: "csdn",
-        id: this.currentSelectedBlogId
+        id: blog.article_url.substr(blog.article_url.lastIndexOf('/') + 1),
       });
 
       this.onSelectCate({ key: this.currentSelectedCateId });

@@ -104,7 +104,6 @@ class JianshuDriver(BaseSiteDriver):
 
         response = HttpRequestUtil.put(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
         if response.status_code != 200:
-            logger.error(response.text)
             return False
 
         logger.info(response.text)
