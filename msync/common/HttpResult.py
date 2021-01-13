@@ -17,6 +17,9 @@ class HttpResult():
     def setData(self, data):
         self.__data["data"] = data
 
+    def getData(self):
+        return self.__data["data"]
+
     def dumps(self):
         return json.dumps(self.__data)
 

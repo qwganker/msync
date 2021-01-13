@@ -104,16 +104,16 @@ export default {
       });
     },
     onPublish() {
-      let targetSites = []
       for (let e in this.checkedList) {
-        targetSites.push(this.siteOptionsMap[this.checkedList[e]])
+        let siteType = this.siteOptionsMap[this.checkedList[e]]
+        API.publishNew({
+          siteType: siteType,
+          title: this.mdText.title,
+          content: this.mdText.content
+        }).then();
       }
 
-      API.publishNew({
-        siteType: "toutiao",
-        title: this.mdText.title,
-        content: this.mdText.content
-      }).then();
+
     }
   }
 };

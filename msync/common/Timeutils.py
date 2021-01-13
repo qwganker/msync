@@ -6,6 +6,11 @@ class TimeUtils():
         return datetime.datetime.now().strftime("%H:%M:%S")
 
     @staticmethod
+    def getNowDate():
+        now = datetime.date.today()
+        return now.strftime("%Y-%m-%d")
+
+    @staticmethod
     def getNowDateTime2():
         return datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
@@ -40,3 +45,4 @@ class TimeUtils():
     @staticmethod
     def formatStrDate(strDate):
         return datetime.datetime.strptime(strDate, '%Y-%m-%d').strftime('%Y-%m-%d')
+

@@ -144,11 +144,15 @@ export default {
       });
     },
     onPublishUpdate() {
+      let blog = this.findBlog(this.currentSelectedBlogId)
+      
       API.publishUpdate({
+        id: this.currentSelectedBlogId,
         siteType: "jianshu",
         title: this.mdText.title,
-        text: this.mdText.content,
-        cateId: this.currentSelectedCateId
+        content: this.mdText.content,
+        cateId: this.currentSelectedCateId,
+        autosave_control: blog.autosave_control
       });
     },
     onDelete() {
