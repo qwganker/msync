@@ -36,16 +36,22 @@ class CsdnDriver(BaseSiteDriver):
                 text += random.choice(char_list)
         return text
 
-    def __createSign(self, method, uuid, url):
+    def __httpPostSign(self, caSignStr):
+        ekey = "9znpamsyl2c7cdrr9sas0le9vbc3r6ba".encode()
+
+        logger.info("[cd sign]:%s\n", caSignStr)
+
+        sign = b64encode(hmac.new(ekey, caSignStr, digestmod=hashlib.sha256).digest()).decode()
+        return sign
+
+
+    def __httpGetSign(self, uuid, url):
         uri = urlparse(url)
         ekey = "9znpamsyl2c7cdrr9sas0le9vbc3r6ba".encode()
 
-        if method == 'GET':
-            to_enc = f"{method}\napplication/json, text/plain, */*\n\n\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path + '?' + uri.query}".encode()
-        else:
-            to_enc = f"{method}\napplication/json, text/plain, */*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path}".encode()
+        to_enc = f"GET\napplication/json, text/plain, */*\n\n\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path + '?' + uri.query}".encode()
 
-        print(to_enc)
+        logger.info("[sign]:%s\n",to_enc)
 
         sign = b64encode(hmac.new(ekey, to_enc, digestmod=hashlib.sha256).digest()).decode()
         return sign
@@ -54,7 +60,7 @@ class CsdnDriver(BaseSiteDriver):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/list?type=all"
 
         uuid = self.__createUUID()
-        sign = self.__createSign("GET", uuid, url)
+        sign = self.__httpGetSign(uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -84,7 +90,7 @@ class CsdnDriver(BaseSiteDriver):
         url = "https://bizapi.csdn.net/blog-console-api/v1/column/getAllArticles?column_id=" + str(param['id'])
 
         uuid = self.__createUUID()
-        sign = self.__createSign('GET', uuid, url)
+        sign = self.__httpGetSign(uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -117,7 +123,7 @@ class CsdnDriver(BaseSiteDriver):
         url = "https://bizapi.csdn.net/blog-console-api/v3/editor/getArticle?id=" + aid + "&model_type"
 
         uuid = self.__createUUID()
-        sign = self.__createSign('GET', uuid, url)
+        sign = self.__httpGetSign(uuid, url)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -146,8 +152,11 @@ class CsdnDriver(BaseSiteDriver):
         aid = str(param['data']['id'])
 
         url = "https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
+
         uuid = self.__createUUID()
-        sign = self.__createSign('POST', uuid, url)
+        uri = urlparse(url)
+        caSignStr = f"POST\napplication/json, text/plain, */*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path}".encode()
+        sign = self.__httpPostSign(caSignStr)
 
         headers = {
             "Host": "bizapi.csdn.net",
@@ -175,12 +184,48 @@ class CsdnDriver(BaseSiteDriver):
         return HttpResult.ok(info="更新成功", data=response.text)
 
     def publishNewBlog(self, param):
-        url = "https://editor.csdn.net/md/"
+        url = "	https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
+        uuid = self.__createUUID()
+        uri = urlparse(url)
+        caSignStr = f"POST\n*/*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n/blog-console-api/v3/mdeditor/saveArticle".encode()
+        sign = self.__httpPostSign(caSignStr)
+
+        payload = {"title": str(param['title']), "markdowncontent": str(param['content']),
+                   "content": str(param['content']), "readType": "public", "tags": "", "status": 0,
+                   "categories": "", "type": "original", "original_link": "", "authorized_status": False,
+                   "not_auto_saved": "1", "source": "pc_mdeditor"}
+        headers = {
+            "Host": "bizapi.csdn.net",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "Accept": "*/*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate, br",
+            "Referer": 'https://editor.csdn.net/md/',
+            "X-Ca-Key": "203803574",
+            "X-Ca-Nonce": uuid,
+            "X-Ca-Signature": sign,
+            "X-Ca-Signature-Headers": "x-ca-key,x-ca-nonce",
+            "Origin": "https://editor.csdn.net",
+            "Connection": "keep-alive",
+            "TE": "Trailers",
+            "Content-Type": "application/json",
+            "Content-Length": str(len(payload))
+        }
+
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        if response.status_code != 200:
+            return HttpResult.error(info="发布失败")
+
+        return HttpResult.ok(info="发布成功", data=response.text)
 
     def deleteBlog(self, param):
         url = 'https://bizapi.csdn.net/blog-console-api/v1/article/del'
+
         uuid = self.__createUUID()
-        sign = self.__createSign('POST', uuid, url)
+        uri = urlparse(url)
+        caSignStr = f"POST\napplication/json, text/plain, */*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n{uri.path}".encode()
+
+        sign = self.__httpPostSign(caSignStr)
 
         payload = {"article_id": str(param['id']), "deep": "false"}
         headers = {
