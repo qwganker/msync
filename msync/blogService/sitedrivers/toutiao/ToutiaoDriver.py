@@ -11,6 +11,7 @@ from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
 from common.WebDriver import WebDriver
 from common.WebCookie import WebCookie
+from common.StringUtil import StringUtil
 
 import logging
 
@@ -98,11 +99,9 @@ class ToutiaoDriver(BaseSiteDriver):
             title.clear()
             title.send_keys(param['title'])
 
-            time.sleep(4)
-
             # 设置内容
             self.__webDriver.execute_script(
-                "document.getElementsByClassName('ProseMirror')[0].innerHTML='" + param['content'] + "'")
+                "document.getElementsByClassName('ProseMirror')[0].innerHTML='" + StringUtil.removeBlankAndBreakLine(param['content']) + "'")
 
             time.sleep(1)
 
@@ -112,7 +111,8 @@ class ToutiaoDriver(BaseSiteDriver):
                 expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
             publishBtn = self.__webDriver.find_element_by_xpath(publishBtn_xpath)
             publishBtn.click()
-
+        except Exception as e:
+            logger.warning(e)
         finally:
             time.sleep(5)
             self.__webDriver.close()
@@ -136,20 +136,29 @@ class ToutiaoDriver(BaseSiteDriver):
             title.clear()
             title.send_keys(param['title'])
 
-            time.sleep(10)
-
             # 设置内容
-            self.__webDriver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='" + param['content'] + "'")
+            content = StringUtil.removeBlankAndBreakLine(param['content'])
+            logger.warning(content)
+            js = "document.getElementsByClassName('ProseMirror')[0].innerHTML = '" + content + "'"
+            logger.warning(js)
+            self.__webDriver.execute_script(js)
 
-            time.sleep(2)
+            # 设置无图
+            coverBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[2]/div[2]/div[1]/div/div[2]/div/div[1]/label[3]/span/div'
+            WebDriverWait(self.__webDriver, 20, 0.5).until(
+                expected_conditions.presence_of_element_located((By.XPATH, coverBtn_xpath)))
+            coverBtn = self.__webDriver.find_element_by_xpath(coverBtn_xpath)
+            coverBtn.click()
 
             # 点击发布按钮
             publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button[4]'
             WebDriverWait(self.__webDriver, 20, 0.5).until(
                 expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
             publishBtn = self.__webDriver.find_element_by_xpath(publishBtn_xpath)
-            # publishBtn.click()
+            publishBtn.click()
 
+        except Exception as e:
+            logger.warning(e)
         finally:
             time.sleep(5)
             self.__webDriver.close()

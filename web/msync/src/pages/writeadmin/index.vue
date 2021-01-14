@@ -56,6 +56,7 @@
 
 <script>
 import * as API from "@/apis/blog.js";
+import marked from 'marked'
 
 export default {
   data() {
@@ -127,11 +128,22 @@ export default {
         }
 
         for (let i in this.form.sites) {
+
+          let site = this.form.sites[i]
+          let title = this.form.title
+          let content = this.form.content
+          let cate = this.form.cate
+
+          // 头条将markdown转html
+          if (this.form.sites[i] == 'toutiao') {
+            content = marked(this.form.content)
+          }
+
           await API.publishNew({
-            siteType: this.form.sites[i],
-            title: this.form.title,
-            cate: this.form.cate,
-            content: this.form.content
+            siteType: site,
+            title: title,
+            cate: cate,
+            content: content
           }).then();
         }
       });
