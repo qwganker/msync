@@ -186,13 +186,12 @@ class CsdnDriver(BaseSiteDriver):
     def publishNewBlog(self, param):
         url = "	https://bizapi.csdn.net/blog-console-api/v3/mdeditor/saveArticle"
         uuid = self.__createUUID()
-        uri = urlparse(url)
         caSignStr = f"POST\n*/*\n\napplication/json\n\nx-ca-key:203803574\nx-ca-nonce:{uuid}\n/blog-console-api/v3/mdeditor/saveArticle".encode()
         sign = self.__httpPostSign(caSignStr)
 
         payload = {"title": str(param['title']), "markdowncontent": str(param['content']),
                    "content": str(param['content']), "readType": "public", "tags": "", "status": 0,
-                   "categories": "", "type": "original", "original_link": "", "authorized_status": False,
+                   "categories": str(param['cate']), "type": "original", "original_link": "", "authorized_status": False,
                    "not_auto_saved": "1", "source": "pc_mdeditor"}
         headers = {
             "Host": "bizapi.csdn.net",

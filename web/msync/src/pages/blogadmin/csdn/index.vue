@@ -18,7 +18,7 @@
     </a-col>
     <a-col :span="18">
       <div style="padding:10px">
-        <a-button type="primary" @click="onPublishUpdate">发布更新</a-button>
+        <a-button type="primary" style="margin-right:10px" @click="onPublishUpdate">发布更新</a-button>
         <a-popconfirm
           placement="bottom"
           ok-text="是"
@@ -174,7 +174,7 @@ export default {
     onSelectSite(e) {
       this.fetchBlogCateList(e.key);
     },
-    fetchBlogCateList(type) {
+    fetchBlogCateList() {
       API.fetchBlogCategoryList({ siteType: "csdn" }).then(resp => {
         this.cateList = resp.data;
       });

@@ -138,7 +138,7 @@ export default {
     onSelectSite(e) {
       this.fetchBlogCateList(e.key);
     },
-    fetchBlogCateList(type) {
+    fetchBlogCateList() {
       API.fetchBlogCategoryList({ siteType: "jianshu" }).then(resp => {
         this.cateList = JSON.parse(resp.data);
       });

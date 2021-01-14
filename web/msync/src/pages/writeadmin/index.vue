@@ -1,32 +1,54 @@
 <template>
   <div>
     <a-card :hoverable="true">
-    <div style="padding: 10px; width: 50%;">
-      <a-input v-model="mdText.title"></a-input>
-    </div>
-    <mavon-editor
-      style="z-index:1"
-      :toolbars="markdownOption"
-      v-model="mdText.content"
-    />
-    <a-divider/>
-    <div>
-      <a-checkbox
-        :indeterminate="indeterminate"
-        :checked="checkAll"
-        @change="onCheckAllChange"
-        >全选</a-checkbox
+      <a-form-model
+        ref="ruleForm"
+        :model="form"
+        :rules="rules"
+        :label-col="labelCol"
+        :wrapper-col="wrapperCol"
       >
-      <a-checkbox-group
-        v-model="checkedList"
-        :options="siteOptions"
-        @change="onChange"
-      >
-      </a-checkbox-group>
-    </div>
-    <div style="padding:10px">
-      <a-button type="primary" @click="onPublish">批量发布</a-button>
-    </div>
+        <a-form-model-item ref="title" label="标题" prop="title">
+          <a-input
+            v-model="form.title"
+            @blur="
+              () => {
+                $refs.title.onFieldBlur();
+              }
+            "
+          />
+        </a-form-model-item>
+        <a-form-model-item label="内容" prop="content">
+          <mavon-editor
+            style="z-index:1"
+            :toolbars="markdownOption"
+            v-model="form.content"
+          />
+        </a-form-model-item>
+        <a-form-model-item ref="cate" label="分类" prop="cate">
+          <a-input
+            v-model="form.cate"
+          />
+        </a-form-model-item>
+        <a-form-model-item label="站点" prop="sites">
+          <a-checkbox-group v-model="form.sites">
+            <a-checkbox value="csdn" name="type">
+              csdn
+            </a-checkbox>
+            <a-checkbox value="jianshu" name="type">
+              简书
+            </a-checkbox>
+          </a-checkbox-group>
+        </a-form-model-item>
+        <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">
+          <a-button type="primary" @click="onPublish">
+            发布
+          </a-button>
+          <a-button style="margin-left: 10px;" @click="resetForm">
+            重置
+          </a-button>
+        </a-form-model-item>
+      </a-form-model>
     </a-card>
   </div>
 </template>
@@ -34,25 +56,31 @@
 <script>
 import * as API from "@/apis/blog.js";
 
-const siteOptions = ['简书', "csdn", "头条"];
-const siteOptionsMap = {
-  '简书':"jianshu",
-  "csdn":"csdn",
-  "头条":"toutiao"
-};
-
 export default {
   data() {
     return {
-      checkedList: [],
-      indeterminate: true,
-      checkAll: false,
-      siteOptions,
-      siteOptionsMap,
-      mdText: {
+      labelCol: { span: 2 },
+      wrapperCol: { span: 18 },
+      other: "",
+      form: {
         title: "",
-        content: ""
+        content: "",
+        cate:'',
+        sites: []
       },
+      rules: {
+        title: [{ required: true, message: "请填写标题", trigger: "blur" }],
+        content: [{ required: true, message: "请填写内容", trigger: "blur" }],
+        sites: [
+          {
+            type: "array",
+            required: true,
+            message: "请选择发布的网站",
+            trigger: "change"
+          }
+        ]
+      },
+
       markdownOption: {
         bold: true, // 粗体
         italic: true, // 斜体
@@ -91,29 +119,24 @@ export default {
     };
   },
   methods: {
-    onChange(checkedList) {
-      this.indeterminate =
-        !!checkedList.length && checkedList.length < siteOptions.length;
-      this.checkAll = checkedList.length === siteOptions.length;
-    },
-    onCheckAllChange(e) {
-      Object.assign(this, {
-        checkedList: e.target.checked ? siteOptions : [],
-        indeterminate: false,
-        checkAll: e.target.checked
+    onPublish() {
+      this.$refs.ruleForm.validate(valid => {
+        if (!valid) {
+          return false;
+        }
+
+        for (let i in this.form.sites) {
+          API.publishNew({
+            siteType: this.form.sites[i],
+            title: this.form.title,
+            cate: this.form.cate,
+            content: this.form.content
+          }).then();
+        }
       });
     },
-    onPublish() {
-      for (let e in this.checkedList) {
-        let siteType = this.siteOptionsMap[this.checkedList[e]]
-        API.publishNew({
-          siteType: siteType,
-          title: this.mdText.title,
-          content: this.mdText.content
-        }).then();
-      }
-
-
+    resetForm() {
+      this.$refs.ruleForm.resetFields();
     }
   }
 };
