@@ -26,9 +26,7 @@
           />
         </a-form-model-item>
         <a-form-model-item ref="cate" label="分类" prop="cate">
-          <a-input
-            v-model="form.cate"
-          />
+          <a-input v-model="form.cate" />
         </a-form-model-item>
         <a-form-model-item label="站点" prop="sites">
           <a-checkbox-group v-model="form.sites">
@@ -65,7 +63,7 @@ export default {
       form: {
         title: "",
         content: "",
-        cate:'',
+        cate: "",
         sites: []
       },
       rules: {

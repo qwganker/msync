@@ -1,5 +1,7 @@
 import time
 
+import json
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.ui import WebDriverWait
@@ -13,6 +15,7 @@ import logging
 
 logger = logging.getLogger('log')
 
+
 class ToutiaoDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
         super().__init__()
@@ -24,7 +27,7 @@ class ToutiaoDriver(BaseSiteDriver):
                 isScure = True
                 if (c.secure == 0):
                     isScure = False
-                driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
+                driver.add_cookie({'name': c.name, 'value': c.value, 'path': c.path, 'secure': isScure})
 
     def fetchBlogCategoryList(self, param=None):
         pass
@@ -34,7 +37,7 @@ class ToutiaoDriver(BaseSiteDriver):
 
         headers = {
             "Host": "mp.toutiao.com",
-            "User-Agent":"Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-US,en;q=0.5",
             "Accept-Encoding": "gzip, deflate",
@@ -56,15 +59,15 @@ class ToutiaoDriver(BaseSiteDriver):
 
         aid = str(param['id'])
 
-        url = "https://mp.toutiao.com/mp/agw/article/edit?pgc_id="+aid+"&format=json"
+        url = "https://mp.toutiao.com/mp/agw/article/edit?pgc_id=" + aid + "&format=json"
         headers = {
             "Host": "mp.toutiao.com",
-            "User-Agent":"Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
             "Accept": "application/json, text/plain, */*",
             "Accept-Language": "en-US,en;q=0.5",
             "Accept-Encoding": "gzip, deflate",
             "Connection": "keep-alive",
-            "Referer": "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id="+aid
+            "Referer": "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id=" + aid
         }
 
         response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
@@ -74,7 +77,7 @@ class ToutiaoDriver(BaseSiteDriver):
         return HttpResult.ok(info="获取成功", data=response.text)
 
     def publishUpdateBlog(self, param):
-        url = "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id="+ param['id']
+        url = "https://mp.toutiao.com/profile_v4/graphic/publish?pgc_id=" + param['id']
 
         driver = PlatformDriver.getDriver()
         driver.maximize_window()
@@ -89,7 +92,8 @@ class ToutiaoDriver(BaseSiteDriver):
         # 设置title
         try:
             title_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea'
-            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
+            WebDriverWait(driver, 20, 0.5).until(
+                expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
             title = driver.find_element_by_xpath(title_xpath)
             title.clear()
             title.send_keys(param['title'])
@@ -97,13 +101,15 @@ class ToutiaoDriver(BaseSiteDriver):
             time.sleep(4)
 
             # 设置内容
-            driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
+            driver.execute_script(
+                "document.getElementsByClassName('ProseMirror')[0].innerHTML='" + param['content'] + "'")
 
             time.sleep(1)
 
             # 点击发布按钮
             publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button'
-            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
+            WebDriverWait(driver, 20, 0.5).until(
+                expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
             publishBtn = driver.find_element_by_xpath(publishBtn_xpath)
             publishBtn.click()
 
@@ -126,7 +132,8 @@ class ToutiaoDriver(BaseSiteDriver):
 
         try:
             title_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[1]/div[3]/div/div/div[2]/div/div/div/textarea'
-            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
+            WebDriverWait(driver, 20, 0.5).until(
+                expected_conditions.presence_of_element_located((By.XPATH, title_xpath)))
             title = driver.find_element_by_xpath(title_xpath)
             title.clear()
             title.send_keys(param['title'])
@@ -134,13 +141,15 @@ class ToutiaoDriver(BaseSiteDriver):
             time.sleep(5)
 
             # 设置内容
-            driver.execute_script("document.getElementsByClassName('ProseMirror')[0].innerHTML='"+param['content']+"'")
+            driver.execute_script(
+                "document.getElementsByClassName('ProseMirror')[0].innerHTML='" + param['content'] + "'")
 
             time.sleep(2)
 
             # 点击发布按钮
             publishBtn_xpath = '/html/body/div[1]/div/div[3]/section/main/div[2]/div/div/div[3]/div/button[4]'
-            WebDriverWait(driver, 20, 0.5).until(expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
+            WebDriverWait(driver, 20, 0.5).until(
+                expected_conditions.presence_of_element_located((By.XPATH, publishBtn_xpath)))
             publishBtn = driver.find_element_by_xpath(publishBtn_xpath)
             publishBtn.click()
 
@@ -149,6 +158,51 @@ class ToutiaoDriver(BaseSiteDriver):
             driver.close()
             return HttpResult.ok(info="发布成功")
 
-
     def deleteBlog(self, param):
-        pass
+        url = 'https://mp.toutiao.com/mp/agw/article/delete/'
+
+        blog_attr = param['blog']['article_attr']
+
+        logger.info(blog_attr)
+
+        item_id = str(blog_attr['item_id'])
+        mp_id = str(blog_attr['mp_id'])
+        create_time = str(blog_attr['create_time'])
+        article_type = str(blog_attr['type'])
+
+        pgc_cell = json.loads(blog_attr['pgc_cell'])
+        group_source = str(pgc_cell['group_source'])
+        has_article_pgc = str(pgc_cell['has_article_pgc'])
+
+        payload = 'item_id=' + item_id \
+                  + '&pgc_id=' + item_id \
+                  + '&id=' + item_id \
+                  + '&article_type=' + article_type \
+                  + '&group_id=' + item_id \
+                  + '&source_type=0&has_article_pgc=' + has_article_pgc \
+                  + '&book_id=&create_time=' + create_time \
+                  + '&group_source=' + group_source \
+                  + '&mp_id=' + mp_id
+
+        logger.info(payload)
+
+        headers = {
+            "Host": "mp.toutiao.com",
+            "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
+            "Accept": "application/json, text/plain, */*",
+            "Accept-Language": "en-US,en;q=0.5",
+            "Accept-Encoding": "gzip, deflate",
+            "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+            "Content-Length": str(len(payload)),
+            "Origin": "https://mp.toutiao.com",
+            "Referer": "https://mp.toutiao.com/profile_v4/graphic/articles",
+            "Connection": "keep-alive",
+            "TE": "Trailers"
+        }
+
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        result = json.loads(response.text)
+        if response.status_code != 200:
+            return HttpResult.error(info="删除失败")
+
+        return HttpResult.ok(info="删除成功")

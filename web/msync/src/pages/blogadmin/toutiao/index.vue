@@ -1,12 +1,5 @@
 <template>
   <div style="height: 100%;">
-    <!-- <a-col style="height: 100%;" :span="2">
-      <a-menu @click="onSelectCate" mode="inline" style="height: 100%;">
-        <a-menu-item v-for="cate in cateList" :key="cate.id">{{
-          cate.name
-        }}</a-menu-item>
-      </a-menu>
-    </a-col> -->
     <a-col style="height: 100%;" :span="4">
       <a-menu @click="onSelectBlog" mode="inline" style="height: 100%;">
         <a-menu-item v-for="blog in blogList" :key="blog.article_attr.gid">{{
@@ -16,7 +9,23 @@
     </a-col>
     <a-col :span="20">
       <div style="padding:10px">
-        <a-button type="primary" @click="onPublishUpdate">发布更新</a-button>
+        <a-button
+          type="primary"
+          style="margin-right:10px"
+          @click="onPublishUpdate"
+          >发布更新</a-button
+        >
+        <a-popconfirm
+          placement="bottom"
+          ok-text="是"
+          cancel-text="否"
+          @confirm="onDelete"
+        >
+          <template slot="title">
+            确认删除
+          </template>
+          <a-button type="danger">删除</a-button>
+        </a-popconfirm>
       </div>
       <div style="padding: 10px; width: 50%;">
         <a-input v-model="mdText.title"></a-input>
@@ -93,6 +102,14 @@ export default {
         siteType: this.siteType
       }).then(resp => {
         this.blogList = JSON.parse(resp.data).contents;
+        console.log(JSON.stringify(this.blogList))
+
+        for (let i in this.blogList) {
+          console.log(JSON.stringify(this.blogList[i].article_attr))
+          console.log("-----------------------------------------")
+          // console.log(JSON.stringify(this.blogList[i]))
+        }
+
       });
     },
     findBlog(id) {
@@ -114,7 +131,7 @@ export default {
     },
     onSelectBlog(e) {
       let blog = this.findBlog(e.key);
-      this.currentSelectedBlogId = e.key
+      this.currentSelectedBlogId = e.key;
 
       this.mdText.title = blog.article_attr.rich_title;
 
@@ -124,38 +141,15 @@ export default {
       }).then(resp => {
         this.mdText.content = JSON.parse(resp.data).content;
       });
+    },
+    onDelete() {
+      API.deleteBlog({
+        siteType: this.siteType,
+        blog: this.findBlog(this.currentSelectedBlogId)
+      });
+      // this.fetchAllBlog()
     }
-    // onSelectCate(e) {
-    //   this.currentSelectedCateId = e.key;
-    //   API.fetchBlogListInCate({
-    //     siteType: this.siteType,
-    //     id: e.key
-    //   }).then(resp => {
-    //     this.blogList = JSON.parse(resp.data);
-    //   });
-    // },
-    // onSelectSite(e) {
-    //   this.fetchBlogCateList(e.key);
-    // },
-    // fetchBlogCateList(type) {
-    //   API.fetchBlogCateList({ siteType: this.siteType }).then(resp => {
-    //     this.cateList = JSON.parse(resp.data);
-    //   });
-    // },
-    // onPublish() {
-    //   API.publishBlog({
-    //     siteType: this.siteType,
-    //     id: this.currentSelectedBlogId
-    //   });
-    // },
-    // onDelete() {
-    //   API.deleteBlog({
-    //     siteType: this.siteType,
-    //     id: this.currentSelectedBlogId
-    //   });
 
-    //   this.onSelectCate({ key: this.currentSelectedCateId });
-    // }
   }
 };
 </script>
