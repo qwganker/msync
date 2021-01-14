@@ -102,13 +102,11 @@ export default {
         siteType: this.siteType
       }).then(resp => {
         this.blogList = JSON.parse(resp.data).contents;
-        console.log(JSON.stringify(this.blogList))
 
-        for (let i in this.blogList) {
-          console.log(JSON.stringify(this.blogList[i].article_attr))
-          console.log("-----------------------------------------")
-          // console.log(JSON.stringify(this.blogList[i]))
-        }
+        // for (let i in this.blogList) {
+        //   console.log(JSON.stringify(this.blogList[i].article_attr))
+        //   console.log("-----------------------------------------")
+        // }
 
       });
     },
@@ -142,12 +140,12 @@ export default {
         this.mdText.content = JSON.parse(resp.data).content;
       });
     },
-    onDelete() {
-      API.deleteBlog({
+    async onDelete() {
+      await API.deleteBlog({
         siteType: this.siteType,
         blog: this.findBlog(this.currentSelectedBlogId)
       });
-      // this.fetchAllBlog()
+      this.fetchAllBlog()
     }
 
   }

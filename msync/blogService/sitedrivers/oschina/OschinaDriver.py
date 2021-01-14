@@ -1,11 +1,11 @@
 from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 
-from common.platformdriver import PlatformDriver
+from common.WebDriver import WebDriver
 
 class OschinaDriver(BaseSiteDriver):
     def __init__(self, *args, **kwargs):
         super().__init__()
-        self.__cookie = PlatformDriver.getCookies()
+        self.__cookie = WebDriver.getCookies()
 
     def __setDriverCookie(self, driver):
         for c in self.__cookie:

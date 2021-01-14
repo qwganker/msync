@@ -3,7 +3,7 @@ import json
 from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
-from common.platformdriver import PlatformDriver
+from common.WebCookie import WebCookie
 from common.Timeutils import TimeUtils
 
 import logging
@@ -12,11 +12,11 @@ logger = logging.getLogger('log')
 
 
 class JianshuDriver(BaseSiteDriver):
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         super().__init__()
-        self.__cookie = PlatformDriver.getCookies()
+        self.__cookies = WebCookie().getAllCookies()
 
-    def __fetchBlogCategoryList(self, param=None):
+    def __fetchBlogCategoryList(self):
         headers = {
             "Host": "www.jianshu.com",
             "User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0",
@@ -30,14 +30,14 @@ class JianshuDriver(BaseSiteDriver):
         }
 
         url = 'https://www.jianshu.com/author/notebooks'
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return False, ''
 
         return True, response.text
 
     def fetchBlogCategoryList(self, param=None):
-        success, data = self.__fetchBlogCategoryList(param)
+        success, data = self.__fetchBlogCategoryList()
 
         if not success:
             return HttpResult.error(info="获取失败")
@@ -58,7 +58,7 @@ class JianshuDriver(BaseSiteDriver):
             "Referer": "https://www.jianshu.com/writer",
         }
 
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -78,7 +78,7 @@ class JianshuDriver(BaseSiteDriver):
             "Referer": "https://www.jianshu.com/writer",
         }
 
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -102,7 +102,7 @@ class JianshuDriver(BaseSiteDriver):
         payload = {"id": str(param["id"]), "autosave_control": param['autosave_control'], "title": param['title'],
                    "content": param['content']}
 
-        response = HttpRequestUtil.put(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.put(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         if response.status_code != 200:
             return False
 
@@ -131,7 +131,7 @@ class JianshuDriver(BaseSiteDriver):
         }
 
         payload = {}
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         result = json.loads(response.text)
         if 'error' in result:
             return HttpResult.error(info=result['error'][0]['message'])
@@ -154,7 +154,7 @@ class JianshuDriver(BaseSiteDriver):
             "Connection": "keep-alive",
             "Referer": "https://www.jianshu.com/writer",
         }
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         if response.status_code != 200:
             return False, ''
 
@@ -201,7 +201,7 @@ class JianshuDriver(BaseSiteDriver):
 
         payload = {}
 
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="删除失败")
 

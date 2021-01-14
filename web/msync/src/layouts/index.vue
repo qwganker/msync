@@ -28,10 +28,10 @@
             <router-link to="/blogadmin/toutiao" />
             头条
           </a-menu-item>
-          <a-menu-item key="oschina">
+          <!-- <a-menu-item key="oschina">
             <router-link to="/blogadmin/oschina" />
             开源中国
-          </a-menu-item>
+          </a-menu-item> -->
         </a-sub-menu>
       </a-menu>
     </a-layout-sider>

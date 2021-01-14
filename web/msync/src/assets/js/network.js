@@ -92,7 +92,7 @@ function genNetwork(instance) {
 const instance = axios.create({
   // baseURL: process.env.VUE_APP_BASE_URL,
   baseURL: process.env.NODE_ENV === 'development' ? '' : 'http://127.0.0.1:8000/',
-  timeout: 1000 * 60 * 10,
+  timeout: 1000 * 60 * 20,
   headers: {
     'X-Frame-Options': 'SAMEORIGIN'
   }

@@ -8,17 +8,16 @@ from urllib.parse import urlparse
 from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
-from common.platformdriver import PlatformDriver
-
+from common.WebCookie import WebCookie
 import logging
 
 logger = logging.getLogger('log')
 
 
 class CsdnDriver(BaseSiteDriver):
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         super().__init__()
-        self.__cookie = PlatformDriver.getCookies()
+        self.__cookies = WebCookie().getAllCookies()
 
     def __createUUID(self):
         text = ""
@@ -78,7 +77,7 @@ class CsdnDriver(BaseSiteDriver):
             "TE": "Trailers"
         }
 
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -108,7 +107,7 @@ class CsdnDriver(BaseSiteDriver):
             "TE": "Trailers"
         }
 
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -142,7 +141,7 @@ class CsdnDriver(BaseSiteDriver):
             "Cache-Control": "max-age=0"
         }
 
-        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookie)
+        response = HttpRequestUtil.get(url, headers=headers, cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="获取失败")
 
@@ -177,7 +176,7 @@ class CsdnDriver(BaseSiteDriver):
             "Content-Length": str(len(param['data']))
         }
 
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(param['data']), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(param['data']), cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="更新失败")
 
@@ -211,7 +210,7 @@ class CsdnDriver(BaseSiteDriver):
             "Content-Length": str(len(payload))
         }
 
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="发布失败")
 
@@ -246,7 +245,7 @@ class CsdnDriver(BaseSiteDriver):
             "Content-Length": str(len(payload))
         }
 
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookie)
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
         if response.status_code != 200:
             return HttpResult.error(info="删除失败")
 

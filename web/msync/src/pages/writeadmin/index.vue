@@ -30,11 +30,14 @@
         </a-form-model-item>
         <a-form-model-item label="站点" prop="sites">
           <a-checkbox-group v-model="form.sites">
-            <a-checkbox value="csdn" name="type">
+            <a-checkbox value="csdn" name="csdn">
               csdn
             </a-checkbox>
-            <a-checkbox value="jianshu" name="type">
+            <a-checkbox value="jianshu" name="jianshu">
               简书
+            </a-checkbox>
+            <a-checkbox value="toutiao" name="toutiao">
+              头条
             </a-checkbox>
           </a-checkbox-group>
         </a-form-model-item>
@@ -117,14 +120,14 @@ export default {
     };
   },
   methods: {
-    onPublish() {
-      this.$refs.ruleForm.validate(valid => {
+    async onPublish() {
+      await this.$refs.ruleForm.validate(async valid => {
         if (!valid) {
           return false;
         }
 
         for (let i in this.form.sites) {
-          API.publishNew({
+          await API.publishNew({
             siteType: this.form.sites[i],
             title: this.form.title,
             cate: this.form.cate,
