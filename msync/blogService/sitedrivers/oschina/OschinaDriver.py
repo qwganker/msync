@@ -1,19 +1,9 @@
 from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 
-from common.WebDriver import WebDriver
 
 class OschinaDriver(BaseSiteDriver):
-    def __init__(self, *args, **kwargs):
+    def __init__(self):
         super().__init__()
-        self.__cookie = WebDriver.getCookies()
-
-    def __setDriverCookie(self, driver):
-        for c in self.__cookie:
-            if 'oschina.net' in c.domain:
-                isScure = True
-                if (c.secure == 0):
-                    isScure = False
-                driver.add_cookie({'name' : c.name, 'value' : c.value, 'path' : c.path, 'secure': isScure})
 
     '''
     获取博客分类
