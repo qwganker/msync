@@ -28,6 +28,10 @@
             <router-link to="/blogadmin/toutiao" />
             头条
           </a-menu-item>
+          <a-menu-item key="juejin">
+            <router-link to="/blogadmin/juejin" />
+            掘金
+          </a-menu-item>
           <!-- <a-menu-item key="oschina">
             <router-link to="/blogadmin/oschina" />
             开源中国

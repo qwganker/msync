@@ -25,9 +25,13 @@ const routes = [
             path: '/blogadmin/toutiao',
             component: () => import('@/pages/blogadmin/toutiao')
           },
+          // {
+          //   path: '/blogadmin/oschina',
+          //   component: () => import('@/pages/blogadmin/oschina')
+          // }
           {
-            path: '/blogadmin/oschina',
-            component: () => import('@/pages/blogadmin/oschina')
+            path: '/blogadmin/juejin',
+            component: () => import('@/pages/blogadmin/juejin')
           }
         ]
       },
