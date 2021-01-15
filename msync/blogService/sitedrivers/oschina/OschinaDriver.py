@@ -5,35 +5,35 @@ class OschinaDriver(BaseSiteDriver):
     def __init__(self):
         super().__init__()
 
-    '''
-    获取博客分类
-    '''
     def fetchBlogCategoryList(self, param=None):
+        """
+        获取博客分类
+        """
         pass
 
-    '''
-    获取某一个分类下的文章列表
-    '''
     def fetchBlogList(self, param=None):
+        """
+        获取某一个分类下的文章列表
+        """
         pass
 
     def fetchContentBlog(self, param=None):
         pass
 
-    '''
-    更新
-    '''
     def publishUpdateBlog(self, param):
+        """
+        更新
+        """
         pass
 
-    '''
-    发布
-    '''
     def publishNewBlog(self, param):
+        """
+        发布
+        """
         pass
 
-    '''
-    删除
-    '''
     def deleteBlog(self, param):
+        """
+        删除
+        """
         pass

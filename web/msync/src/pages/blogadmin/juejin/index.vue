@@ -116,9 +116,13 @@ export default {
       let blog = this.findBlog(this.currentSelectedBlogId);
       API.publishUpdate({
         siteType: this.siteType,
-        id: blog.article_attr.gid,
+        id: blog.article_id,
         title: this.mdText.title,
-        content: this.mdText.content
+        content: this.mdText.content,
+        meta: {
+            blog: blog
+        }
+
       }).then();
     },
     onSelectBlog(e) {
@@ -137,7 +141,7 @@ export default {
     async onDelete() {
       await API.deleteBlog({
         siteType: this.siteType,
-        blog: this.findBlog(this.currentSelectedBlogId)
+        id: this.findBlog(this.currentSelectedBlogId).article_id
       });
       this.fetchAllBlog()
     }
