@@ -39,6 +39,9 @@
             <a-checkbox value="toutiao" name="toutiao">
               头条
             </a-checkbox>
+            <a-checkbox value="juejin" name="juejin">
+              掘金
+            </a-checkbox>
           </a-checkbox-group>
         </a-form-model-item>
         <a-form-model-item :wrapper-col="{ span: 14, offset: 4 }">

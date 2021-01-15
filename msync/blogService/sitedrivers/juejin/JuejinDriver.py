@@ -4,6 +4,7 @@ from blogService.sitedrivers.BaseSiteDriver import BaseSiteDriver
 from common.HttpRequestUtil import HttpRequestUtil
 from common.HttpResult import HttpResult
 from common.WebCookie import WebCookie
+from common.StringUtil import StringUtil
 
 import logging
 
@@ -78,6 +79,64 @@ class JuejinDriver(BaseSiteDriver):
 
         return True, result['data']
 
+    def __createArticleDraft(self, title, content):
+        url = 'https://juejin.cn/content_api/v1/article_draft/create'
+
+        # "category_id": 6809637772874219534 -- 阅读
+        # "tag_id": 6809640507191328782  -- markdown
+        payload = {"category_id": "6809637772874219534", "tag_ids": ["6809640507191328782"], "link_url": "",
+                   "cover_image": "", "title": title,
+                   "brief_content": "", "edit_type": 10, "html_content": "deprecated", "mark_content": content}
+
+        headers = {
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Content-Length': StringUtil.objectStringLen(payload),
+            'Host': 'juejin.cn',
+            'Origin': 'https://juejin.cn',
+            'Referer': 'https://juejin.cn/editor/drafts/new?v=2',
+            'TE': 'Trailers',
+            'Cache-Control': 'max-age=0',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0'
+        }
+
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
+        result = json.loads(response.text)
+        if 0 != result['err_no']:
+            return False, "草稿新建失败"
+
+        return True, result['data']
+
+    def __publishBlog(self, article_id):
+
+        url = 'https://juejin.cn/content_api/v1/article/publish'
+        payload = {"draft_id": article_id}
+        headers = {
+            'Accept': '*/*',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+            'Content-Length': str(len(payload)),
+            'Host': 'api.juejin.cn',
+            'Origin': 'https://juejin.cn',
+            'Referer': 'https://juejin.cn/editor/drafts/' + article_id,
+            'TE': 'Trailers',
+            'Cache-Control': 'max-age=0',
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0'
+        }
+
+        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
+        result = json.loads(response.text)
+        if 0 != result['err_no']:
+            return HttpResult.error(info="发布失败")
+
+        return HttpResult.ok(info="发布成功", data=result['data'])
+
+
     def fetchBlogList(self, param=None):
         """
         获取某一个分类下的文章列表
@@ -148,36 +207,18 @@ class JuejinDriver(BaseSiteDriver):
             return HttpResult.error(info=data)
 
         article_id = data['id']
-
-        url = 'https://juejin.cn/content_api/v1/article/publish'
-        payload = {"draft_id": article_id}
-        headers = {
-            'Accept': '*/*',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Connection': 'keep-alive',
-            'Content-Type': 'application/json',
-            'Content-Length': str(len(payload)),
-            'Host': 'api.juejin.cn',
-            'Origin': 'https://juejin.cn',
-            'Referer': 'https://juejin.cn/editor/drafts/' + article_id,
-            'TE': 'Trailers',
-            'Cache-Control': 'max-age=0',
-            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0'
-        }
-
-        response = HttpRequestUtil.post(url, headers=headers, data=json.dumps(payload), cookies=self.__cookies)
-        result = json.loads(response.text)
-        if 0 != result['err_no']:
-            return HttpResult.error(info="发布更新失败")
-
-        return HttpResult.ok(info="发布更新成功", data=result['data'])
+        return self.__publishBlog(article_id)
 
     def publishNewBlog(self, param):
         """
         发布
         """
-        pass
+        success, draft = self.__createArticleDraft(param['title'], param['content'])
+        if not success:
+            return HttpResult.error(info="发布失败")
+
+        return self.__publishBlog(draft['id'])
+
 
     def deleteBlog(self, param):
         """
