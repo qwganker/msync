@@ -8,7 +8,8 @@ import { notification } from 'ant-design-vue';
 // import { RESPONSE_STATUS, STORAGE_KEY } from '@/assets/js/constants';
 // import router from '@/router';
 notification.config({
-  duration: 1
+  placement: 'topRight',
+  duration: 1.5
 });
 
 NProgress.configure({

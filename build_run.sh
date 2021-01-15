@@ -12,5 +12,8 @@ fi
 
 mv  ./dist ../../msync/web
 
-
 echo "打包完成"
+
+cd ../../msync/
+python3 manage.py runserver
+

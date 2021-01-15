@@ -106,7 +106,6 @@ class JianshuDriver(BaseSiteDriver):
         if response.status_code != 200:
             return False
 
-        logger.info(response.text)
         return True
 
     def publishUpdateBlog(self, param):
