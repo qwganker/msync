@@ -3,10 +3,9 @@ import json
 from django.http import HttpResponse
 
 
-class HttpResult():
+class HttpResult:
     def __init__(self, *args, **kwargs):
-        self.__data = {}
-        self.__data["info"] = ""
+        self.__data = {"info": ""}
 
     def setCode(self, code):
         self.__data["code"] = code

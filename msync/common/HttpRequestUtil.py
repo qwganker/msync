@@ -5,7 +5,7 @@ import requests
 logger = logging.getLogger('log')
 
 
-class HttpRequestUtil():
+class HttpRequestUtil:
 
     @staticmethod
     def get(url, headers, cookies):

@@ -1,7 +1,7 @@
 import browser_cookie3
 import msync.settings as SYS_CONF
 
-class WebCookie():
+class WebCookie:
 
     def __init__(self):
         if SYS_CONF.PlatformDriverType == 'firefox':

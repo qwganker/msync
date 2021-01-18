@@ -7,7 +7,7 @@ from email.mime.text import MIMEText
 from django.conf import settings
 
 
-class EmailUtil():
+class EmailUtil:
 
     @staticmethod
     def send(destEmail, text):

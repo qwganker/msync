@@ -1,6 +1,6 @@
 import datetime
 
-class TimeUtils():
+class TimeUtils:
     @staticmethod
     def getNow():
         return datetime.datetime.now().strftime("%H:%M:%S")
