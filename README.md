@@ -5,10 +5,10 @@
 
 ### 效果
 - 文章发布
-![](./img/msync-1.png)
+![](https://github.com/qwganker/msync/blob/master/img/msync-1.png)
 
 - 文章管理
-![](./img/msync-2.png)
+![](https://github.com/qwganker/msync/blob/master/img/msync-2.png)
 
 
 ### 安装依赖
